@@ -1,0 +1,98 @@
+/* Mobile responsive styles for Five Leagues Campaign */
+
+@media (max-width: 768px) {
+    /* Stack layout vertically on mobile */
+    body > div {
+        flex-direction: column !important;
+    }
+    
+    /* Main content area - full width */
+    body > div > div:first-child {
+        width: 100% !important;
+    }
+    
+    /* Sidebar container - full width and stack below */
+    body > div > div:last-child {
+        width: 100% !important;
+        margin-top: 20px;
+    }
+    
+    /* Campaign selector buttons - smaller on mobile */
+    .border-blue button,
+    .bg-pink,
+    .bg-grey {
+        font-size: 0.85em;
+        padding: 4px 8px !important;
+        margin: 5px 2px !important;
+    }
+    
+    /* Menu links - wrap better on mobile */
+    .border-green {
+        font-size: 0.85em;
+    }
+    
+    .border-green a {
+        display: inline-block;
+        margin: 5px 8px !important;
+    }
+    
+    /* Reduce iframe heights for mobile */
+    iframe[style*="600px"] {
+        height: 400px !important;
+    }
+    
+    iframe[style*="800px"] {
+        height: 500px !important;
+    }
+    
+    iframe[name="sidebar-dice-roller"] {
+        height: 200px !important;
+    }
+    
+    iframe[name="sidebar-general"] {
+        height: 600px !important;
+    }
+    
+    /* Content box padding */
+    .content-box {
+        padding: 10px !important;
+    }
+    
+    /* Headings - slightly smaller */
+    h2 {
+        font-size: 1.3em;
+    }
+    
+    h3 {
+        font-size: 1.1em;
+    }
+    
+    /* Tables and grids - allow horizontal scroll if needed */
+    .content-box > div {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small screens - even more compact */
+    .border-blue button,
+    .bg-pink,
+    .bg-grey {
+        font-size: 0.75em;
+        padding: 3px 6px !important;
+    }
+    
+    .border-green {
+        font-size: 0.75em;
+    }
+    
+    .border-green a {
+        margin: 3px 5px !important;
+    }
+    
+    /* Hide "new tab" and "sidebar" labels on very small screens */
+    .border-green a:nth-child(1)::after,
+    .border-green a:nth-child(2)::after {
+        content: none;
+    }
+}
