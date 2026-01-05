@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music - Ljudvag</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Music</h1>
+        
+        <div class="marquee">
+            <marquee>Audio Stuff</marquee>
+        </div>
+        
+        <div id="menu-container"></div>
+        <script src="../assets/js/menu.js"></script>
+        
+        <div class="content-box">
+                    <h2 class="text-pink">AEON SMOG</h2>
+            <ul>
+                <li><a href="https://aeonsmog.bandcamp.com/" target="_blank">https://aeonsmog.bandcamp.com/</a></li>
+                <li><a href="https://soundcloud.com/aeonsmog" target="_blank">https://soundcloud.com/aeonsmog</a></li>
+             <li><a href="https://music.apple.com/us/artist/aeon-smog/1559870108" target="_blank">Apple Music</a></li>           
+            <li><a href="https://open.spotify.com/artist/59oWgguIGhwMr4IC4JL6rK?si=b_rJRi4wTN-AU8zc8ksn4w" target="_blank">Spotify</a></li>
+
+            </ul>  
+            
+            <hr>
+                    <h2 class="text-blue">Random insanities</h2>
+            <ul>
+                <li><a href="https://soundcloud.com/dudewaaagh" target="_blank">https://soundcloud.com/dudewaaagh</a></li>
+            </ul>  
+            
+            <hr>    
+            
+            <h2 class="text-green">Hardware</h2>
+            <p>
+               Some stuff not around anymore though.
+
+            <li>Elektron Analog 4 mk.2</li>
+            <li>Elektron Model:Cycles</li>
+            <li>Korg Volca Keys</li>
+            <li>Korg Volca Beats</li>
+            <li>Korg Volca Bass</li>
+            <li>Korg Monotron Delay</li>
+            <li>Korg Monotribe</li>
+            <li>Korg iMS-20</li>
+            <li>Arturia Keystep</li>
+            <li>Arturia Microbrute</li>
+            <li>Arturia Drumbrute</li>
+            <li>Teenage Engineering PO-16</li>
+            <li>Teenage Engineering PO-20</li>
+            <li>Teenage Engineering PO-28</li>
+            <li>Stylophone</li>
+            <li>TC Electronics Flashback mini</li>
+            <li>Moog Theremin</li>
+            <li>Behringer UCA202</li>
+            <li>Behringer XenyxQX1002</li>
+            </p>
+        </div>
+        
+        <div class="content-box" style="margin-top: 20px;">
+            <h2 class="text-blue">Recent Music Posts</h2>
+            <div id="music-posts"></div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+            <a href="../index.html">Back to Home</a>
+        </div>
+    </div>
+    
+    <script src="../blog/posts.js"></script>
+    <script>
+        const musicPosts = blogPosts.filter(post => post.category === 'music');
+        const postsContainer = document.getElementById('music-posts');
+        
+        if (musicPosts.length === 0) {
+            postsContainer.innerHTML = '<p>No music posts yet.</p>';
+        } else {
+            musicPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let html = '<ul style="list-style: none; padding: 0;">';
+            musicPosts.forEach(post => {
+                html += `
+                    <li style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #666;">
+                        <h3><a href="../blog/${post.url}" style="color: #0099ff;">${post.title}</a></h3>
+                        <p style="color: #999; font-size: 0.9em;">${post.date}</p>
+                        <p>${post.excerpt}</p>
+                    </li>
+                `;
+            });
+            html += '</ul>';
+            
+            postsContainer.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

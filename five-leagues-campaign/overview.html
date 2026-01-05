@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="tooltips.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-blue" style="margin-top: 0;">Campaign Overview</h3>
+        
+        <p id="campaign-overview">Loading...</p>
+        
+        <hr style="border-color: #333; margin: 20px 0;">
+        
+        <h3 class="text-pink">Campaign Events</h3>
+        <div id="campaign-posts">Loading...</div>
+    </div>
+    
+    <script src="../blog/posts.js"></script>
+    <script>
+        // Get campaign parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('c') || '0';
+        const campaignNum = campaignId;
+        
+        // Load the appropriate campaign data file
+        const script = document.createElement('script');
+        script.src = `c${campaignNum}-warband-data.js`;
+        script.onload = function() {
+            // Update overview
+            document.getElementById('campaign-overview').innerHTML = overview;
+            
+            // Display posts
+            const fullCampaignId = '5Leagues-' + campaignNum;
+            const posts = blogPosts.filter(p => p.category === fullCampaignId).sort((a, b) => new Date(b.date) - new Date(a.date));
+            const container = document.getElementById('campaign-posts');
+            
+            if (posts.length === 0) {
+                container.innerHTML = '<p>No Campaign events yet.</p>';
+            } else {
+                container.innerHTML = '<ul style="list-style: none; padding: 0;">' + 
+                    posts.map(p => `<li style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #666;">
+                        <h3><a href="../blog/${p.url}" style="color: #0099ff;" target="_blank">${p.title}</a></h3>
+                        <p style="color: #999; font-size: 0.9em;">${p.date}</p>
+                        <p>${p.excerpt}</p></li>`).join('') + '</ul>';
+            }
+        };
+        
+        script.onerror = function() {
+            document.getElementById('campaign-overview').innerHTML = 'Error loading campaign data.';
+            document.getElementById('campaign-posts').innerHTML = 'Error loading posts.';
+        };
+        
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

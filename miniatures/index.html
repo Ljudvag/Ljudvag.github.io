@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miniatures - Ljudvag</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Miniatures</h1>
+        
+        <div class="marquee">
+            <marquee>Painting | Modeling | Tabletop Gaming</marquee>
+        </div>
+        
+        <div id="menu-container"></div>
+        <script src="../assets/js/menu.js"></script>
+        
+        <div class="content-box">
+            <h2 class="text-pink">Gallery</h2>
+            <p>
+                I might create a gallery, or just show posts. We'll see.
+            </p>
+            
+            <hr>
+         
+        </div>
+        
+        <div class="content-box" style="margin-top: 20px;">
+            <h2 class="text-blue">Recent Miniatures Posts</h2>
+            <div id="minis-posts"></div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+            <a href="../index.html">Back to Home</a>
+        </div>
+    </div>
+    
+    <script src="../blog/posts.js"></script>
+    <script>
+        const minisPosts = blogPosts.filter(post => post.category === 'minis');
+        const postsContainer = document.getElementById('minis-posts');
+        
+        if (minisPosts.length === 0) {
+            postsContainer.innerHTML = '<p>No miniatures posts yet.</p>';
+        } else {
+            minisPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            let html = '<ul style="list-style: none; padding: 0;">';
+            minisPosts.forEach(post => {
+                html += `
+                    <li style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #666;">
+                        <h3><a href="../blog/${post.url}" style="color: #0099ff;">${post.title}</a></h3>
+                        <p style="color: #999; font-size: 0.9em;">${post.date}</p>
+                        <p>${post.excerpt}</p>
+                    </li>
+                `;
+            });
+            html += '</ul>';
+            
+            postsContainer.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

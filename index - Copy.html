@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>~* Welcome to My Corner of the Web *~</title>
+    <style>
+        @font-face {
+            font-family: 'Press Start 2P';
+            font-style: normal;
+            font-weight: 400;
+            src: url('assets/fonts/press-start-2p.ttf') format('truetype');
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'VT323';
+            font-style: normal;
+            font-weight: 400;
+            src: url('assets/fonts/vt323.ttf') format('truetype');
+            font-display: swap;
+        }
+        body {
+            background: #ffccff;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect fill="%23ff99ff" width="10" height="10"/><rect fill="%23ffccff" x="10" width="10" height="10"/><rect fill="%23ffccff" y="10" width="10" height="10"/><rect fill="%23ff99ff" x="10" y="10" width="10" height="10"/></svg>');
+            font-family: 'VT323', monospace;
+            font-size: 1.3em;
+            color: #000080;
+            margin: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border: 3px solid #ff0099;
+            padding: 20px;
+            box-shadow: 5px 5px 0px #660066;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #ff0099;
+            text-shadow: 2px 2px #ffccff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.8em;
+            line-height: 1.5;
+            animation: rainbow 3s infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { color: #ff0099; }
+            33% { color: #0099ff; }
+            66% { color: #00ff99; }
+            100% { color: #ff0099; }
+        }
+        
+        h2, h3 {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.5;
+        }
+        
+        .marquee {
+            background: #000080;
+            color: #00ff00;
+            padding: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        marquee {
+            font-weight: bold;
+        }
+        
+        .menu-bar {
+            background: linear-gradient(to bottom, #ff99ff, #ff0099);
+            border: 3px solid #ff0099;
+            padding: 0;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        
+        .menu-bar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        
+        .menu-bar li {
+            position: relative;
+            flex: 1;
+        }
+        
+        .menu-bar a,
+        .menu-bar .menu-title {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            text-align: center;
+            font-weight: bold;
+            border-right: 2px solid #ff0099;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .menu-bar li:last-child > a,
+        .menu-bar li:last-child > .menu-title {
+            border-right: none;
+        }
+        
+        .menu-bar a:hover,
+        .menu-bar .menu-title:hover,
+        .menu-bar li:hover > a,
+        .menu-bar li:hover > .menu-title {
+            background: #ff0099;
+        }
+        
+        .menu-bar .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #ffffcc;
+            min-width: 200px;
+            box-shadow: 3px 3px 0px #660066;
+            border: 2px solid #ff0099;
+            z-index: 1;
+            left: 0;
+            top: 100%;
+        }
+        
+        .menu-bar .dropdown-content a {
+            color: #000080;
+            padding: 10px 15px;
+            text-align: left;
+            border-right: none;
+            border-bottom: 1px dotted #ff0099;
+        }
+        
+        .menu-bar .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .menu-bar .dropdown-content a:hover {
+            background: #ff99ff;
+            color: white;
+        }
+        
+        .menu-bar li:hover .dropdown-content {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        td {
+            border: 2px dotted #ff0099;
+            padding: 15px;
+            vertical-align: top;
+        }
+        
+        .sidebar {
+            background: #ffffcc;
+            width: 200px;
+        }
+        
+        .button {
+            display: block;
+            background: linear-gradient(to bottom, #ff99ff, #ff0099);
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            margin: 5px 0;
+            border: 2px outset #ff99ff;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .button:active {
+            border-style: inset;
+        }
+        
+        .counter {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            padding: 5px;
+            display: inline-block;
+            border: 2px solid #0f0;
+        }
+        
+        .gif-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .under-construction {
+            display: inline-block;
+            background: yellow;
+            color: black;
+            padding: 10px;
+            border: 3px solid black;
+            transform: rotate(-2deg);
+            font-weight: bold;
+        }
+        
+        hr {
+            border: 0;
+            height: 2px;
+            background: repeating-linear-gradient(
+                90deg,
+                #ff0099,
+                #ff0099 10px,
+                #0099ff 10px,
+                #0099ff 20px
+            );
+        }
+        
+        blink {
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Welcome to Ljudvag's Homepage ✨</h1>
+        
+        <div class="marquee">
+            <marquee>⭐ You are visitor number <span class="counter">001337</span> ⭐ Last updated: January 3, 2026 ⭐ Best viewed in ANY browser! ⭐</marquee>
+        </div>
+        
+        <nav class="menu-bar">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#interests">Interests</a></li>
+                <li><a href="#guestbook">Guestbook</a></li>
+                <li>
+                    <span class="menu-title">Links</span>
+                    <div class="dropdown-content">
+                        <a href="https://github.com/ljudvag">My GitHub</a>
+                        <a href="https://yesterweb.org/">Yesterweb</a>
+                        <a href="https://neocities.org/">Neocities</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="menu-title">Buttons</span>
+                    <div class="dropdown-content" style="text-align: center; padding: 10px;">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect fill='%23ff0099' width='88' height='31'/%3E%3Ctext x='44' y='20' text-anchor='middle' fill='white' font-family='Arial' font-size='12' font-weight='bold'%3EYESTERWEB%3C/text%3E%3C/svg%3E" alt="Yesterweb Button" style="width: 88px; margin: 5px 0;"><br>
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='31'%3E%3Crect fill='%230099ff' width='88' height='31'/%3E%3Ctext x='44' y='20' text-anchor='middle' fill='white' font-family='Arial' font-size='10' font-weight='bold'%3EMADE WITH HTML%3C/text%3E%3C/svg%3E" alt="HTML Button" style="width: 88px; margin: 5px 0;">
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        
+        <div style="padding: 20px; border: 2px dotted #ff0099;">
+                    <div class="gif-container">
+                        <span class="under-construction">🚧 UNDER CONSTRUCTION 🚧</span>
+                    </div>
+                    
+                    <h2 id="about" style="color: #0099ff;">👤 About Me</h2>
+                    <p>
+                        Hello and welcome to my <b>personal corner</b> of the internet! 
+                        I'm Ljudvag, and I believe in the spirit of the <i>old web</i> - 
+                        where websites were personal, creative, and fun!
+                    </p>
+                    <p>
+                        <blink>★</blink> This site is a celebration of individuality and creativity <blink>★</blink>
+                    </p>
+                    
+                    <hr>
+                    
+                    <h2 id="interests" style="color: #ff0099;">💖 My Interests</h2>
+                    <ul>
+                        <li>🎵 Sound design & music</li>
+                        <li>💻 Web development (the old-school way!)</li>
+                        <li>🎨 Digital art & pixel art</li>
+                        <li>📚 Reading & writing</li>
+                        <li>🌐 Exploring the indie web</li>
+                    </ul>
+                    
+                    <hr>
+                    
+                    <h2 id="guestbook" style="color: #00cc00;">📝 Sign My Guestbook!</h2>
+                    <p style="text-align: center; font-size: 1.2em;">
+                        <i>Coming soon! In the meantime, feel free to email me at:</i><br>
+                        <b>ljudvaag at pm dot me</b>
+                    </p>
+                    
+                    <hr>
+                    
+                    <div style="text-align: center; margin-top: 30px; padding: 20px; background: #e6f2ff; border: 2px dashed #0099ff;">
+                        <p style="font-size: 1.1em;">
+                            💌 <i>"Be yourself, everyone else is already taken."</i> 💌
+                        </p>
+                    </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+            © 2026 Ljudvag | This site is part of the <a href="https://yesterweb.org/">Yesterweb</a> movement
+        </div>
+    </div>
+</body>
+</html>

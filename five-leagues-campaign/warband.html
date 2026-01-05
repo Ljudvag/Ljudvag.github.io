@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="tooltips.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-pink" style="margin-top: 0;" id="campaign-title">Campaign Warband</h3>
+        
+        <div id="warband-container"></div>
+    </div>
+    
+    <script>
+        // Get campaign parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('c') || '0';
+        
+        // Helper function to render items with tooltips if they exist
+        function renderItem(item) {
+            // Check if item starts with a number (quantity)
+            const quantityMatch = item.match(/^(\d+\s+)(.+)$/);
+            let quantity = '';
+            let itemText = item;
+            
+            if (quantityMatch) {
+                quantity = quantityMatch[1];
+                itemText = quantityMatch[2];
+            }
+            
+            // Check if item has modifier in parentheses like (Fine), (Damaged)
+            const modifierMatch = itemText.match(/^(.+?)\s*(\([^)]+\))$/);
+            if (modifierMatch) {
+                const baseName = modifierMatch[1];
+                const modifier = modifierMatch[2];
+                const modifierName = modifier.slice(1, -1); // Remove parentheses
+                
+                const baseTooltip = tooltips[baseName] ? tt(baseName) : baseName;
+                const modifierTooltip = tooltips[modifierName] ? '(' + tt(modifierName) + ')' : modifier;
+                
+                return quantity + baseTooltip + ' ' + modifierTooltip;
+            }
+            
+            return quantity + (tooltips[itemText] ? tt(itemText) : itemText);
+        }
+        
+        // Helper function to render a list with tooltips
+        function renderList(items) {
+            return items.map(item => renderItem(item)).join(', ');
+        }
+        
+        // Function to generate character HTML
+        function renderCharacter(char) {
+            const colorMap = {
+                'Avatar': 'text-blue',
+                'Hero': 'text-green',
+                'Follower': 'text-pink',
+                'Dead/Retired:': 'text-grey'
+            };
+            const titleClass = colorMap[char.type] || '';
+            
+            let html = `<h4 class="${titleClass}">${char.name}</h4>`;
+            
+            if (char.notes) {
+                html += `<p style="font-style: italic; font-size: 0.85em; margin-top: -10px; color: #999;">${char.notes}</p>`;
+            }
+            if (char.history) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>History:</strong><br>
+                    ${char.history}
+                </p>`;
+            }
+                        
+            html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.9em; margin-bottom: 10px;">
+                <div><strong>Origin:</strong> ${renderItem(char.origin)}</div>
+                <div><strong>Background:</strong> ${char.background}</div>
+                <div><strong>Level:</strong> ${char.level}</div>
+                <div><strong>XP:</strong> ${char.xp}</div>
+            </div>`;
+            
+            html += `<p style="font-size: 0.9em;">
+                <strong>Stats:</strong><br>
+                Agility: ${char.stats.agility} | Speed: ${char.stats.speed} | Combat: ${char.stats.combat} <br> Tough: ${char.stats.tough} | ${tt('Will')}: ${char.stats.will} | Luck: ${char.stats.luck} | Casting: ${char.stats.casting} 
+            </p>`;
+            
+
+            if (char.proficiencies.length > 0) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>Proficiencies:</strong><br>
+                    ${renderList(char.proficiencies)}
+                </p>`;
+            }
+            
+            if (char.spells.length > 0) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>Spells:</strong><br>
+                    ${renderList(char.spells)}
+                </p>`;
+            }
+            
+            if (char.equipment.length > 0) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>Equipment:</strong><br>
+                    ${renderList(char.equipment)}
+                </p>`;
+            }
+            
+            return html;
+        }
+        
+        // Load the appropriate campaign data file
+        const script = document.createElement('script');
+        script.src = `c${campaignId}-warband-data.js`;
+        script.onload = function() {
+            // Update title
+            document.getElementById('campaign-title').textContent = `${campaignName} Warband`;
+            
+            // Render the warband
+            let html = '';
+            
+            if (!warband || warband.length === 0) {
+                html = '<p style="color: #666;">No warband members yet.</p>';
+            } else {
+                warband.forEach((member, index) => {
+                    if (index > 0) html += `<div style="margin-top: 20px;">`;
+                    html += renderCharacter(member);
+                    if (index > 0) html += `</div>`;
+                });
+            }
+            
+            document.getElementById('warband-container').innerHTML = html;
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

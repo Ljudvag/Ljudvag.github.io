@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-blue" style="margin-top: 0;" id="map-title">Campaign Map</h3>
+        
+        <div id="map-container" style="text-align: center; margin: 20px 0;"></div>
+    </div>
+    
+    <script>
+        // Get campaign parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('c') || '0';
+        
+        // Load the appropriate campaign map data file
+        const script = document.createElement('script');
+        script.src = `c${campaignId}-map-data.js`;
+        script.onload = function() {
+            // Update title
+            const campaignNum = campaignId;
+            
+            if (!mapData) {
+                document.getElementById('map-container').innerHTML = '<p>No map available for this campaign.</p>';
+                return;
+            }
+            
+            // Build map grid
+            let html = '<div style="display: grid; grid-template-columns: repeat(' + mapData.columns + ', 36px); gap: 2px; justify-content: center;">';
+            
+            mapData.sections.forEach(section => {
+                const imgStyle = 'width: 32px; height: 32px; display: block;' + (section.clickable ? ' border: 2px solid #ff00ff;' : '');
+                const img = `<img src="${section.image}" alt="${section.alt}" style="${imgStyle}">`;
+                html += section.clickable ? `<a href="${section.page}" target="sidebar-general" style="cursor: pointer;">${img}</a>` : img;
+            });
+            
+            html += '</div>';
+            
+            document.getElementById('map-container').innerHTML = html;
+        };
+        
+        script.onerror = function() {
+            document.getElementById('map-container').innerHTML = '<p style="color: #666;">Error loading map data.</p>';
+        };
+        
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

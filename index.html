@@ -1,4 +1,84 @@
----
-layout: home
-# Index page
----
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>++ Ljudvag Home ++</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>A World Wide Web web site</h1>
+        
+        <div class="marquee">
+            <marquee>Best viewed in a browser</marquee>
+        </div>
+        
+        <div id="menu-container"></div>
+        <script src="assets/js/menu.js"></script>
+        
+        <div class="content-box">
+              
+                    
+                    <h2 class="text-pink">About Me</h2>
+                    <p>
+                        Hello, I am in your Internet.
+                    </p>
+                    <p>
+                        <blink>*</blink>I can blink. <blink>*</blink>
+                        <br>
+                    </p>
+                    
+                    <hr>
+                    
+                    <h2 class="text-green">Contact</h2>
+                    <p style="text-align: left; font-size: 1.2em;">
+                        <i>don't spam me at:</i><br>
+                        <b>markus at ljudvag dot se</b>
+                    </p>
+                    
+                    <hr>
+                          <h2 class="text-blue">Recent Posts</h2>
+                    <div id="posts-list">
+                        <p>Loading posts...</p>
+                    </div>
+                    
+                    <hr>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+            © 2026 Ljudvag
+        </div>
+    </div>
+    
+    <script src="blog/posts.js"></script>
+    <script>
+        // Display recent blog posts
+        const postsList = document.getElementById('posts-list');
+        
+        if (!blogPosts || blogPosts.length === 0) {
+            postsList.innerHTML = '<p>No posts yet.</p>';
+        } else {
+            // Sort by date (newest first)
+            blogPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            // Show only the 5 most recent posts
+            const recentPosts = blogPosts.slice(0, 5);
+            
+            let html = '<ul style="list-style: none; padding: 0;">';
+            recentPosts.forEach(post => {
+                html += `
+                    <li style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #666;">
+                        <h3><a href="blog/${post.url}" style="color: #0099ff;">${post.title}</a></h3>
+                        <p style="color: #999; font-size: 0.9em;">${post.date}</p>
+                        <p>${post.excerpt}</p>
+                    </li>
+                `;
+            });
+            html += '</ul>';
+            
+            postsList.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

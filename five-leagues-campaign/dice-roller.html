@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-blue" style="margin-top: 0;">Dice Roller</h3>
+        
+        <div style="margin: 10px 0; display: flex; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 5px; flex: 1;">
+                <button onclick="rollDice(4)" class="bg-blue" style="padding: 8px; color: #ffffff; border: 2px solid #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 14px; flex: 1;">D4</button>
+                <span id="result-d4" style="font-size: 1.2em; font-weight: bold; width: 30px;">-</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 5px; flex: 1;">
+                <button onclick="rollDice(6)" class="bg-blue" style="padding: 8px; color: #ffffff; border: 2px solid #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 14px; flex: 1;">D6</button>
+                <span id="result-d6" style="font-size: 1.2em; font-weight: bold; width: 30px;">-</span>
+            </div>
+        </div>
+        
+        <div style="margin: 10px 0; display: flex; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 5px; flex: 1;">
+                <button onclick="rollDice(8)" class="bg-pink" style="padding: 8px; color: #ffffff; border: 2px solid #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 14px; flex: 1;">D8</button>
+                <span id="result-d8" style="font-size: 1.2em; font-weight: bold; width: 30px;">-</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 5px; flex: 1;">
+                <button onclick="rollDice(10)" class="bg-pink" style="padding: 8px; color: #ffffff; border: 2px solid #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 14px; flex: 1;">D10</button>
+                <span id="result-d10" style="font-size: 1.2em; font-weight: bold; width: 30px;">-</span>
+            </div>
+        </div>
+        
+        <div style="margin: 10px 0; display: flex; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 5px; flex: 1;">
+                <button onclick="rollDice(20)" class="bg-green" style="padding: 8px; color: #000000; border: 2px solid #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 14px; flex: 1;">D20</button>
+                <span id="result-d20" style="font-size: 1.2em; font-weight: bold; width: 30px;">-</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 5px; flex: 1;">
+                <button onclick="rollDice(100)" class="bg-green" style="padding: 8px; color: #000000; border: 2px solid #ffffff; cursor: pointer; font-family: 'VT323', monospace; font-size: 14px; flex: 1;">D100</button>
+                <span id="result-d100" style="font-size: 1.2em; font-weight: bold; width: 30px;">-</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function rollDice(sides) {
+            const result = Math.floor(Math.random() * sides) + 1;
+            document.getElementById(`result-d${sides}`).innerHTML = result;
+        }
+    </script>
+</body>
+</html>

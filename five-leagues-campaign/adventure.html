@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="tooltips.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-pink" style="margin-top: 0;" id="adventure-title">Adventure</h3>
+        
+        <div id="resources-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; padding: 10px; background-color: #1a1a1a; border: 1px solid #333;"></div>
+        
+        <div id="events-quests-container"></div>
+    </div>
+    
+    <script>
+        // Get campaign parameter from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('c') || '0';
+        
+        // Load the appropriate campaign data file
+        const script = document.createElement('script');
+        script.src = `c${campaignId}-warband-data.js`;
+        script.onload = function() {
+            // Update title
+            document.getElementById('adventure-title').textContent = `${campaignName} Adventure`;
+            
+            // Update resources
+            const storyPointsTooltip = tt('Story Points');
+            const adventurePointsTooltip = tt('Adventure Points');
+            
+            document.getElementById('resources-container').innerHTML = `
+                <div style="text-align: center;">
+                    <div style="font-weight: bold; color: #00ccff; font-size: 0.9em;">${storyPointsTooltip}</div>
+                    <div style="font-size: 1.1em;">${warbandResources.storyPoints}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-weight: bold; color: #00ccff; font-size: 0.9em;">${adventurePointsTooltip}</div>
+                    <div style="font-size: 1.1em;">${warbandResources.adventurePoints}</div>
+                </div>
+            `;
+            
+            // Build Story Events and Quests HTML
+            let html = '';
+            
+            // Story Events
+            if (storyEvents && Object.keys(storyEvents).length > 0) {
+                const availableEvents = [];
+                const usedEvents = [];
+                
+                Object.values(storyEvents).forEach(event => {
+                    if (event.Used) {
+                        usedEvents.push(event.Name);
+                    } else {
+                        availableEvents.push(event.Name);
+                    }
+                });
+                
+                if (availableEvents.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #ffcc00; margin-bottom: 10px;">
+                        <h4 style="margin-top: 0; color: #ffcc00; font-size: 0.95em;">Available Story Events</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    availableEvents.forEach(eventName => {
+                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333;">${tt(eventName)}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+                
+                if (usedEvents.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #666; margin-bottom: 10px;">
+                        <h4 style="color: #999; margin-top: 0; font-size: 0.95em;">Used Story Events</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    usedEvents.forEach(eventName => {
+                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333; color: #999;">${eventName}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+            }
+            
+            // Quests
+            if (quests.active.length > 0) {
+                html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #00cc00; margin-bottom: 10px;">
+                    <h4 class="text-green" style="margin-top: 0; font-size: 0.95em;">Active Quests</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                quests.active.forEach(quest => {
+                    if (quest && quest.trim() !== '') {
+                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333;">${quest}</li>`;
+                    }
+                });
+                html += `</ul></div>`;
+            }
+            
+            if (quests.completed.length > 0) {
+                html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #666; margin-bottom: 10px;">
+                    <h4 style="color: #999; margin-top: 0; font-size: 0.95em;">Completed Quests</h4>
+                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                quests.completed.forEach(quest => {
+                    if (quest && quest.trim() !== '') {
+                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333; color: #999;">${quest}</li>`;
+                    }
+                });
+                html += `</ul></div>`;
+            }
+            
+            if (html === '') {
+                html = '<p style="color: #666; font-style: italic; font-size: 0.9em;">No events or quests.</p>';
+            }
+            
+            document.getElementById('events-quests-container').innerHTML = html;
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>

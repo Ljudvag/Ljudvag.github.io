@@ -1,0 +1,170 @@
+@font-face {
+    font-family: 'Press Start 2P';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/press-start-2p.ttf') format('truetype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VT323';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/vt323.ttf') format('truetype');
+    font-display: swap;
+}
+
+body {
+    background: #000000;
+    font-family: 'VT323', monospace;
+    font-size: 1.3em;
+    color: #ffffff;
+    margin: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: black;
+    border: 3px solid white;
+    padding: 20px;
+    box-shadow: 5px 5px 0px #333333;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px #000000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.8em;
+    line-height: 1.5;
+}
+
+h2, h3 {
+    font-family: 'Press Start 2P', cursive;
+    line-height: 1.5;
+}
+
+.marquee {
+    background: #000000;
+    color: #ffffff;
+    padding: 10px;
+    margin: 10px 0;
+    overflow: hidden;
+    border: 1px solid white;
+}
+
+marquee {
+    font-weight: bold;
+}
+
+.menu-bar {
+    background: black;
+    border: 3px solid white;
+    padding: 0;
+    margin: 15px 0;
+    overflow: hidden;
+}
+
+.menu-bar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu-bar li {
+    position: relative;
+    flex: 1;
+}
+
+.menu-bar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px;
+    text-align: center;
+    font-weight: bold;
+    border-right: 2px solid white;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.menu-bar li:last-child > a {
+    border-right: none;
+}
+
+.menu-bar a:hover,
+.menu-bar li:hover > a {
+    background: #333333;
+}
+
+.counter {
+    background: #000;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    padding: 5px;
+    display: inline-block;
+    border: 2px solid #fff;
+}
+
+hr {
+    border: 0;
+    height: 2px;
+    background: white;
+}
+
+blink {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.text-blue {
+    color: #2fa5f4;
+}
+
+.text-pink {
+    color: #f71b9c;
+    
+}
+.text-pink-old {
+    color: #ff00ff;
+    
+}
+
+.text-green {
+    color: #00cc00;
+}
+
+.bg-blue {
+    background-color: #0099ff;
+}
+
+.bg-pink {
+    background-color: #f71b9c;
+}
+
+.bg-green {
+    background-color: #00cc00;
+}
+
+.bg-grey {
+    background-color: #666;
+}
+
+.content-box {
+    padding: 20px;
+    border: 2px dotted #ff00ff;
+}
+
+.border-blue {
+    border: 2px solid #0099ff;
+}
+
+.border-green {
+    border: 2px solid #00cc00;
+}

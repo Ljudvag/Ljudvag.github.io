@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Five Leagues Campaign - Ljudvag</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <div style="display: flex; gap: 20px; max-width: 1400px; margin: 0 auto;">
+        <div class="container" style="width: 75%;">
+            <h1>Five Leagues Campaign</h1>
+            
+            <div id="menu-container"></div>
+            <script src="../assets/js/menu.js"></script>
+            
+            <div class="border-blue" style="padding: 10px; margin-top: 10px; text-align: center;">
+                <span class="text-blue" style="margin-right: 15px;"><strong>Campaigns:</strong></span>
+                <button onclick="loadCampaign('5Leagues-1')" class="bg-pink" style="margin-right: 10px; padding: 5px 10px; cursor: pointer;">Willhelms Hounds</button>
+                <button onclick="loadCampaign('5Leagues-2')" class="bg-pink" style="margin-right: 10px; padding: 5px 10px; cursor: pointer;">Example</button>
+                <button onclick="loadCampaign('5Leagues-0')" class="bg-grey" style="padding: 5px 10px; cursor: pointer;">Campaign Template</button>
+            </div>
+            
+            <div class="border-green" style="padding: 10px; margin-top: 10px; text-align: center;">
+                <a href="javascript:void(0)" onclick="showOverview()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Overview</a>
+                <a href="javascript:void(0)" onclick="showMap()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Map</a>
+                <a href="javascript:void(0)" onclick="showAdventure()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Adventure</a>
+                <a href="javascript:void(0)" onclick="showWarband()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Warband (new tab)</a>
+                <a id="warband-sidebar-link" href="warband.html?c=1" target="sidebar-general" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Warband (sidebar)</a>
+                <a id="stash-sidebar-link" href="stash.html?c=1" target="sidebar-general" class="text-green" style="text-decoration: none; font-weight: bold;">Stash</a>
+            </div>
+            
+            <div class="content-box" style="margin-top: 20px;">
+                <div id="campaign-content">
+                    <!-- Map or other content will load here -->
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+                <a href="../index.html">Back to Home</a>
+            </div>
+        </div>
+        
+        <div style="width: 25%; display: flex; flex-direction: column; gap: 20px; align-self: flex-start; margin-top: 0px; flex-shrink: 0;">
+            <div style="border: 2px solid #ffffff; background-color: #000000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); overflow: hidden;">
+                <iframe name="sidebar-dice-roller" src="dice-roller.html" style="width: 100%; height: 250px; border: none; display: block;"></iframe>
+            </div>
+            
+            <div style="border: 2px solid #ffffff; background-color: #000000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); overflow: hidden;">
+                <iframe name="sidebar-general" src="warband.html?c=1" style="width: 100%; height: 800px; border: none; display: block;"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../blog/posts.js"></script>
+    <script src="tooltips.js"></script>
+    
+    <script>
+        let currentCampaign = '5Leagues-1';
+        
+        // Store loaded campaign data
+        let loadedCampaignData = null;
+        
+        // Function to dynamically load campaign data
+        function loadCampaignData(campaignNum) {
+            return new Promise((resolve, reject) => {
+                // Remove any existing campaign data script
+                const existingScript = document.getElementById('campaign-data-script');
+                if (existingScript) {
+                    existingScript.remove();
+                }
+                
+                // Create script element
+                const script = document.createElement('script');
+                script.id = 'campaign-data-script';
+                script.src = `c${campaignNum}-warband-data.js`;
+                
+                script.onload = () => {
+                    // Capture the data immediately after loading
+                    try {
+                        loadedCampaignData = {
+                            campaignName: campaignName,
+                            overview: overview,
+                            resources: warbandResources,
+                            questsData: quests,
+                            storyEvents: storyEvents
+                        };
+                        resolve(loadedCampaignData);
+                    } catch (error) {
+                        console.error('Error accessing campaign data:', error);
+                        resolve({
+                            campaignName: 'Campaign ' + campaignNum,
+                            overview: 'Error loading campaign data.',
+                            resources: { storyPoints: 0, adventurePoints: 0, goldMarks: 0 },
+                            questsData: { active: [], completed: [] },
+                            storyEvents: {}
+                        });
+                    }
+                };
+                
+                script.onerror = () => {
+                    console.error('Error loading campaign data file');
+                    resolve({
+                        overview: 'Error loading campaign data.',
+                        resources: { storyPoints: 0, adventurePoints: 0, goldMarks: 0 },
+                        questsData: { active: [], completed: [] }
+                    });
+                };
+                
+                document.head.appendChild(script);
+            });
+        }
+        
+        function showWarband() {
+            const campaignNum = currentCampaign.split('-')[1];
+            window.open(`warband.html?c=${campaignNum}`, '_blank');
+        }
+        
+        function showOverview() {
+            // Load overview page in main content area
+            const campaignNum = currentCampaign.split('-')[1];
+            document.getElementById('campaign-content').innerHTML = 
+                `<iframe src="overview.html?c=${campaignNum}" style="width: 100%; height: 600px; border: none;"></iframe>`;
+        }
+        
+        function showAdventure() {
+            const campaignNum = currentCampaign.split('-')[1];
+            document.querySelector('iframe[name="sidebar-general"]').src = `adventure.html?c=${campaignNum}`;
+        }
+        
+        function showMap() {
+            const campaignNum = currentCampaign.split('-')[1];
+            document.getElementById('campaign-content').innerHTML = 
+                `<iframe src="map.html?c=${campaignNum}" style="width: 100%; height: 600px; border: none;"></iframe>`;
+        }
+        
+        function loadCampaign(campaignId) {
+            currentCampaign = campaignId;
+            const campaignNum = campaignId.split('-')[1];
+            
+            // Load campaign data dynamically
+            loadCampaignData(campaignNum).then(campaign => {
+                // Update sidebar link and iframe
+                document.getElementById('warband-sidebar-link').href = `warband.html?c=${campaignNum}`;
+                document.getElementById('stash-sidebar-link').href = `stash.html?c=${campaignNum}`;
+                document.querySelector('iframe[name="sidebar-general"]').src = `warband.html?c=${campaignNum}`;
+            });
+        }
+        
+        // Load default campaign
+        loadCampaign(currentCampaign);
+    </script>
+</body>
+</html>
