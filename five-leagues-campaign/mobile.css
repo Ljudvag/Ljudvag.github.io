@@ -21,19 +21,27 @@
     .border-blue button,
     .bg-pink,
     .bg-grey {
-        font-size: 0.85em;
-        padding: 4px 8px !important;
-        margin: 5px 2px !important;
+        font-size: 0.75em;
+        padding: 3px 6px !important;
+        margin: 3px 2px !important;
     }
     
-    /* Menu links - wrap better on mobile */
+    /* Menu links - wrap and reduce spacing */
     .border-green {
-        font-size: 0.85em;
+        font-size: 0.8em;
+        line-height: 1.8;
     }
     
     .border-green a {
         display: inline-block;
-        margin: 5px 8px !important;
+        margin: 3px 5px !important;
+        white-space: nowrap;
+    }
+    
+    /* Campaign selector text */
+    .border-blue span {
+        display: block;
+        margin-bottom: 5px;
     }
     
     /* Reduce iframe heights for mobile */
@@ -78,21 +86,27 @@
     .border-blue button,
     .bg-pink,
     .bg-grey {
-        font-size: 0.75em;
-        padding: 3px 6px !important;
+        font-size: 0.7em;
+        padding: 2px 4px !important;
+        margin: 2px 1px !important;
     }
     
     .border-green {
-        font-size: 0.75em;
+        font-size: 0.7em;
+        padding: 5px !important;
     }
     
     .border-green a {
-        margin: 3px 5px !important;
+        margin: 2px 3px !important;
+        font-size: 0.9em;
     }
     
-    /* Hide "new tab" and "sidebar" labels on very small screens */
-    .border-green a:nth-child(1)::after,
-    .border-green a:nth-child(2)::after {
-        content: none;
+    /* Abbreviate menu text on very small screens */
+    .border-green a:nth-child(1) {
+        /* Warband (new tab) */
+    }
+    
+    .border-green a:nth-child(2) {
+        /* Warband (sidebar) */
     }
 }
