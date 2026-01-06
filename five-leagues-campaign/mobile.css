@@ -17,6 +17,16 @@
         margin-top: 20px;
     }
     
+    /* Main navigation menu - reduce font size and allow wrapping */
+    #menu-container {
+        font-size: 0.75em !important;
+    }
+    
+    #menu-container a {
+        margin: 3px 5px !important;
+        display: inline-block;
+    }
+    
     /* Campaign selector buttons - smaller on mobile */
     .border-blue button,
     .bg-pink,
@@ -24,6 +34,7 @@
         font-size: 0.75em;
         padding: 3px 6px !important;
         margin: 3px 2px !important;
+        color: #000000 !important;
     }
     
     /* Menu links - wrap and reduce spacing */
@@ -83,12 +94,23 @@
 
 @media (max-width: 480px) {
     /* Extra small screens - even more compact */
+    
+    /* Main navigation menu - even smaller */
+    #menu-container {
+        font-size: 0.65em !important;
+    }
+    
+    #menu-container a {
+        margin: 2px 3px !important;
+    }
+    
     .border-blue button,
     .bg-pink,
     .bg-grey {
         font-size: 0.7em;
         padding: 2px 4px !important;
         margin: 2px 1px !important;
+        color: #000000 !important;
     }
     
     .border-green {
