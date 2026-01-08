@@ -1,7 +1,7 @@
 // Define all tooltips in one place
 const tooltips = {
     // Resources
-    'Story Points': 'Used to influence narrative events and campaign progression',
+    'Story Points': 'Page 58, add this later.',
     'Adventure Points': 'These represent the efforts of your warband in exploring and uncovering the secrets of the land and will help you progress in various ways.',
 
     
@@ -10,6 +10,7 @@ const tooltips = {
 
     // Stats
     'Will': 'Spend to:&#10;* Move 4&quot; extra during normal Move. &#10;* Activate in Quick Actions Phase &#10; * Remove Stunned and gain Initiative at end of melee exchange &#10;* +2 to proficiency test. Declare before rolling. &#10;Non-humans max 1.&#10;Spent during encounter and regained afterwards.',
+    'Luck': 'Spend permanently to ignore a result from Injury Table or Flight in the Dark Table.',
     // Story Events
     'Better Part of Valor': 'The entire warband immediately escapes from the battle and does not have to roll on the Flight in the Dark table. ',
     'A Lucky Break!': 'A character may ignore a roll they just made on the post-game Injury Table or Flight in the Dark Table.',
@@ -17,12 +18,22 @@ const tooltips = {
     "I Don't Think That's How The Story Went...": 'When rolling on any type of random events table, roll twice and pick the result you like best. If you dislike both results, you may choose to have nothing happen.',
     'Did I Ever Tell You How I Learned To Do This?': 'Automatically succeed at a proficiency test, and if a skill is applicable, add the skill to the character permanently.',
 
+    // Threats
+    'The Whispers from Beyond': 'A sickness lies upon the land, bringing the stench of unnatural sorceries. &#10; Foes within: Undead and Cultists.',
+    'The Ruin Within': 'Criminals and murderers, compelled by a dark power.&#10; Foes within: Brigands and Bandits. ',
+    'The Curse of War': 'A brutal war becomes a curse upon the land.&#10;Foes without: Ghouls and War Cultists.',
+    'Threat 1 Name': 'Description of the first threat.',
+    'Threat 2 Name': 'Description of the second threat.',
+    'Threat 3 Name': 'Description of the third threat.',
+
     // Proficiencies
     'Driven': 'Only race that can gain more than 1 point of Will (p.53). +2 XP when gaining Will from Advancement.',
     'Lucky Shot': '5+ to hit with ranged attacks if target is concealed or in cover.',
     'Tough': 'Ignore first injury',
     
     //Equipment
+    'Backpack': 'Max 8 items. Cannot be used by temporary allies',
+    'Stash': 'Only accessible in settlements.',
     //Weapons
     // Weapon traits (Bulky, Parry etc) can be found on pg.60.
     'Improvised Weapon': 'Melee -1 / -1',
@@ -52,11 +63,12 @@ const tooltips = {
     'Shield': 'Armor Rating +1 against Ranged attacks. &#10;Parry against Melee strikes.',
     // Quality
     'Fine': 'If Damaged, ignore the damage, but the item is no longer Fine',
-    'Damaged': 'The item is Damaged',
+    'Damaged': 'Cannot be used until repaired, either with a Repair kit or by a Blacksmith (pg.82)',
     'Fey Steel': 'Item cannot be Damaged. &#10; Weapons: Only Standard Weapon, Fencing Sword and Bastard Sword.&#10;Armor: Only Partial or Full Armor.',
     'Quality': 'Add +1 to damage rolls.',
     'Quick': 'Add +1 to attack rolls.',
     // Items
+    // Items can be either B (Backpack to be used), C (Consumable) or W (Worn by a character)
     'Silvertree Leaf': 'Reroll one post-game Injury.&#10; If character would have initially died, increase recovery by 1d3 turns.&#10;No effect on rolls on Flight in the Dark table.',
     //Spells
     

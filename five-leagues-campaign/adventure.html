@@ -5,27 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="tooltips.js"></script>
+    <script src="shared-utils.js"></script>
 </head>
 <body style="margin: 0; padding: 0;">
     <div style="padding: 20px; background-color: #000000; color: #ffffff;">
         <h3 class="text-pink" style="margin-top: 0;" id="adventure-title">Adventure</h3>
         
+        <div style="margin-bottom: 15px; font-size: 0.9em;">
+            <strong class="text-green">Player:</strong> <span id="player-name">Loading...</span><br>
+            <strong class="text-yellow">Region:</strong> <span id="region-name">Loading...</span>
+        </div>
+        
         <div id="resources-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; padding: 10px; background-color: #1a1a1a; border: 1px solid #333;"></div>
+        
+        <div id="threats-container" style="margin-bottom: 15px;"></div>
         
         <div id="events-quests-container"></div>
     </div>
     
     <script>
-        // Get campaign parameter from URL
         const urlParams = new URLSearchParams(window.location.search);
         const campaignId = urlParams.get('c') || '0';
         
-        // Load the appropriate campaign data file
-        const script = document.createElement('script');
-        script.src = `c${campaignId}-warband-data.js`;
-        script.onload = function() {
-            // Update title
+        loadCampaignScript(campaignId, function() {
             document.getElementById('adventure-title').textContent = `${campaignName} Adventure`;
+            
+            // Update player and region info
+            document.getElementById('player-name').textContent = playerName;
+            document.getElementById('region-name').textContent = regionName;
             
             // Update resources
             const storyPointsTooltip = tt('Story Points');
@@ -33,14 +40,31 @@
             
             document.getElementById('resources-container').innerHTML = `
                 <div style="text-align: center;">
-                    <div style="font-weight: bold; color: #00ccff; font-size: 0.9em;">${storyPointsTooltip}</div>
+                    <div class="text-blue" style="font-weight: bold; font-size: 0.9em;">${storyPointsTooltip}</div>
                     <div style="font-size: 1.1em;">${warbandResources.storyPoints}</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="font-weight: bold; color: #00ccff; font-size: 0.9em;">${adventurePointsTooltip}</div>
+                    <div class="text-blue" style="font-weight: bold; font-size: 0.9em;">${adventurePointsTooltip}</div>
                     <div style="font-size: 1.1em;">${warbandResources.adventurePoints}</div>
                 </div>
             `;
+            
+            // Build Threats HTML
+            let threatsHtml = '<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #ff6600; margin-bottom: 10px;">';
+            threatsHtml += '<h4 class="text-pink" style="margin-top: 0;">Threats</h4>';
+            threatsHtml += '<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 0.9em;">';
+            
+            Object.values(threats).forEach(threat => {
+                threatsHtml += `
+                    <div style="text-align: center; padding: 8px; background-color: #0a0a0a; border: 1px solid #333;">
+                        <div style="font-weight: bold; margin-bottom: 5px;" class="text-pink">${tt(threat.name)}</div>
+                        <div class="text-yellow">Level: ${threat.level}</div>
+                    </div>
+                `;
+            });
+            
+            threatsHtml += '</div></div>';
+            document.getElementById('threats-container').innerHTML = threatsHtml;
             
             // Build Story Events and Quests HTML
             let html = '';
@@ -60,7 +84,7 @@
                 
                 if (availableEvents.length > 0) {
                     html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #ffcc00; margin-bottom: 10px;">
-                        <h4 style="margin-top: 0; color: #ffcc00; font-size: 0.95em;">Available Story Events</h4>
+                        <h4 class="text-yellow" style="margin-top: 0; font-size: 0.95em;">Available Story Events</h4>
                         <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
                     availableEvents.forEach(eventName => {
                         html += `<li style="padding: 4px 0; border-bottom: 1px solid #333;">${tt(eventName)}</li>`;
@@ -70,47 +94,96 @@
                 
                 if (usedEvents.length > 0) {
                     html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #666; margin-bottom: 10px;">
-                        <h4 style="color: #999; margin-top: 0; font-size: 0.95em;">Used Story Events</h4>
+                        <h4 class="text-grey" style="margin-top: 0; font-size: 0.95em;">Used Story Events</h4>
                         <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
                     usedEvents.forEach(eventName => {
-                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333; color: #999;">${eventName}</li>`;
+                        html += `<li class="text-grey" style="padding: 4px 0; border-bottom: 1px solid #333;">${eventName}</li>`;
                     });
                     html += `</ul></div>`;
                 }
             }
             
             // Quests
-            if (quests.active.length > 0) {
-                html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #00cc00; margin-bottom: 10px;">
-                    <h4 class="text-green" style="margin-top: 0; font-size: 0.95em;">Active Quests</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
-                quests.active.forEach(quest => {
-                    if (quest && quest.trim() !== '') {
+            if (quests && quests.active && quests.active.length > 0) {
+                const activeQuests = quests.active.filter(quest => quest && quest.trim() !== '');
+                if (activeQuests.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #00cc00; margin-bottom: 10px;">
+                        <h4 class="text-green" style="margin-top: 0; font-size: 0.95em;">Active Quests</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    activeQuests.forEach(quest => {
                         html += `<li style="padding: 4px 0; border-bottom: 1px solid #333;">${quest}</li>`;
-                    }
-                });
-                html += `</ul></div>`;
+                    });
+                    html += `</ul></div>`;
+                }
             }
             
-            if (quests.completed.length > 0) {
-                html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #666; margin-bottom: 10px;">
-                    <h4 style="color: #999; margin-top: 0; font-size: 0.95em;">Completed Quests</h4>
-                    <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
-                quests.completed.forEach(quest => {
-                    if (quest && quest.trim() !== '') {
-                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333; color: #999;">${quest}</li>`;
-                    }
-                });
-                html += `</ul></div>`;
+            if (quests && quests.completed && quests.completed.length > 0) {
+                const completedQuests = quests.completed.filter(quest => quest && quest.trim() !== '');
+                if (completedQuests.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #666; margin-bottom: 10px;">
+                        <h4 class="text-grey" style="margin-top: 0; font-size: 0.95em;">Completed Quests</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    completedQuests.forEach(quest => {
+                        html += `<li class="text-grey" style="padding: 4px 0; border-bottom: 1px solid #333;">${quest}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+            }
+            
+            // Contracts
+            if (contracts && contracts.active && contracts.active.length > 0) {
+                const activeContracts = contracts.active.filter(contract => contract && contract.trim() !== '');
+                if (activeContracts.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #cc9900; margin-bottom: 10px;">
+                        <h4 class="text-yellow" style="margin-top: 0; font-size: 0.95em;">Active Contracts</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    activeContracts.forEach(contract => {
+                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333;">${contract}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+            }
+            
+            if (contracts && contracts.completed && contracts.completed.length > 0) {
+                const completedContracts = contracts.completed.filter(contract => contract && contract.trim() !== '');
+                if (completedContracts.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #666; margin-bottom: 10px;">
+                        <h4 class="text-grey" style="margin-top: 0; font-size: 0.95em;">Completed Contracts</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    completedContracts.forEach(contract => {
+                        html += `<li class="text-grey" style="padding: 4px 0; border-bottom: 1px solid #333;">${contract}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+            }
+            
+            // Friends
+            if (friends && friends.length > 0) {
+                const activeFriends = friends.filter(friend => friend && friend.trim() !== '');
+                if (activeFriends.length > 0) {
+                    html += `<div style="padding: 10px; background-color: #1a1a1a; border: 2px solid #00aaff; margin-bottom: 10px;">
+                        <h4 class="text-blue" style="margin-top: 0; font-size: 0.95em;">Friends</h4>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.85em;">`;
+                    activeFriends.forEach(friend => {
+                        html += `<li style="padding: 4px 0; border-bottom: 1px solid #333;">${friend}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
             }
             
             if (html === '') {
-                html = '<p style="color: #666; font-style: italic; font-size: 0.9em;">No events or quests.</p>';
+                html = '<p class="text-grey" style="font-style: italic; font-size: 0.9em;">No events or quests.</p>';
             }
             
             document.getElementById('events-quests-container').innerHTML = html;
-        };
-        document.head.appendChild(script);
+            
+            // Add link to open in new tab
+            const currentUrl = window.location.href;
+            const linkHtml = `<div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #333;">
+                <a href="${currentUrl}" target="_blank" class="text-blue" style="text-decoration: none; font-weight: bold;">Open in New Tab</a>
+            </div>`;
+            document.getElementById('events-quests-container').innerHTML += linkHtml;
+        });
     </script>
 </body>
 </html>

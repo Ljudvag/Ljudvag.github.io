@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="tooltips.js"></script>
+    <script src="shared-utils.js"></script>
 </head>
 <body style="margin: 0; padding: 0;">
     <div style="padding: 20px; background-color: #000000; color: #ffffff;">
@@ -14,43 +15,10 @@
     </div>
     
     <script>
-        // Get campaign parameter from URL
         const urlParams = new URLSearchParams(window.location.search);
         const campaignId = urlParams.get('c') || '0';
         
-        // Helper function to render items with tooltips if they exist
-        function renderItem(item) {
-            // Check if item starts with a number (quantity)
-            const quantityMatch = item.match(/^(\d+\s+)(.+)$/);
-            let quantity = '';
-            let itemText = item;
-            
-            if (quantityMatch) {
-                quantity = quantityMatch[1];
-                itemText = quantityMatch[2];
-            }
-            
-            // Check if item has modifier in parentheses like (Fine), (Damaged)
-            const modifierMatch = itemText.match(/^(.+?)\s*(\([^)]+\))$/);
-            if (modifierMatch) {
-                const baseName = modifierMatch[1];
-                const modifier = modifierMatch[2];
-                const modifierName = modifier.slice(1, -1); // Remove parentheses
-                
-                const baseTooltip = tooltips[baseName] ? tt(baseName) : baseName;
-                const modifierTooltip = tooltips[modifierName] ? '(' + tt(modifierName) + ')' : modifier;
-                
-                return quantity + baseTooltip + ' ' + modifierTooltip;
-            }
-            
-            return quantity + (tooltips[itemText] ? tt(itemText) : itemText);
-        }
-        
-        // Load the appropriate campaign data file
-        const script = document.createElement('script');
-        script.src = `c${campaignId}-warband-data.js`;
-        script.onload = function() {
-            // Update title
+        loadCampaignScript(campaignId, function() {
             document.getElementById('campaign-title').textContent = `${campaignName} Stash`;
             
             // Render the stash
@@ -58,11 +26,11 @@
             
             // Gold Marks section
             html += `<div style="margin-bottom: 15px;">
-                <h4 style="color: #ffcc00; margin: 0 0 5px 0;">Gold Marks: ${warbandResources.goldMarks}</h4>
+                <h4 class="text-yellow" style="margin: 0 0 5px 0;">Gold Marks: ${warbandResources.goldMarks}</h4>
             </div>`;
             
             // Equipment Stash section
-            html += `<div style="padding: 15px; margin-bottom: 20px; background-color: #1a1a1a; border: 2px solid #00ccff;">
+            html += `<div class="border-blue" style="padding: 15px; margin-bottom: 20px; background-color: #1a1a1a;">
                 <h4 class="text-blue" style="margin-top: 0;">Equipment Stash</h4>`;
             
             if (stash.equipmentStash.length > 0) {
@@ -72,13 +40,13 @@
                 });
                 html += `</ul>`;
             } else {
-                html += `<p style="color: #666;">No items in equipment stash.</p>`;
+                html += `<p class="text-grey">No items in equipment stash.</p>`;
             }
             
             html += `</div>`;
             
             // Backpack section
-            html += `<div style="padding: 15px; margin-bottom: 20px; background-color: #1a1a1a; border: 2px solid #00cc00;">
+            html += `<div class="border-green" style="padding: 15px; margin-bottom: 20px; background-color: #1a1a1a;">
                 <h4 class="text-green" style="margin-top: 0;">Backpack</h4>`;
             
             if (stash.backpack.length > 0) {
@@ -93,9 +61,14 @@
             
             html += `</div>`;
             
+            // Add link to open in new tab
+            const currentUrl = window.location.href;
+            html += `<div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #333;">
+                <a href="${currentUrl}" target="_blank" class="text-blue" style="text-decoration: none; font-weight: bold;">Open in New Tab</a>
+            </div>`;
+            
             document.getElementById('stash-container').innerHTML = html;
-        };
-        document.head.appendChild(script);
+        });
     </script>
 </body>
 </html>

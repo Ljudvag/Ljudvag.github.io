@@ -6,7 +6,7 @@ var mapData = {
         { image: 'images/grass.png', clickable: false, alt: 'Grass' },
         { image: 'images/grass.png', clickable: false, alt: 'Grass' },
         { image: 'images/forest.png', clickable: false, alt: 'Forest' },
-        { image: 'images/town.png', clickable: true, page: 'c0-area1.html', alt: 'Town' },
+        { image: 'images/town.png', clickable: true, page: 'c0/area1.html', alt: 'Town' },
         { image: 'images/mountain.png', clickable: false, alt: 'Mountain' },
           { image: 'images/forest.png', clickable: false, alt: 'Forest' },
         { image: 'images/grass.png', clickable: false, alt: 'Grass' },

@@ -159,6 +159,8 @@ blink {
 .content-box {
     padding: 20px;
     border: 2px dotted #ff00ff;
+    overflow: visible;
+    height: auto;
 }
 
 .border-blue {

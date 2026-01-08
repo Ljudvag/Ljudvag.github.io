@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <script src="../tooltips.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-blue" style="margin-top: 0;">Camp</h3>
+        
+        <h4 class="text-pink">Threat</h4>
+        <p id="threat-name" style="font-size: 20px;">
+            Loading...
+        </p>
+        
+        <h4 class="text-green">Description</h4>
+        <p style="font-size: 14px;">
+            The enemy uses Camps as staging grounds for launching attacks, as well as rallying points
+        </p>
+        
+        <h4 class="text-yellow">Notes</h4>
+        <ul style="font-size: 14px;">
+            <li>When exploring a detected Camp, proceed to the Encounters section (p.113), and set up Scenario C: Camp Raid (p.137).</li>
+        </ul>
+    </div>
+    
+    <script src="warband-data.js"></script>
+    <script>
+        if (threats && threats.threat1) {
+            const threatName = threats.threat1.name;
+            const threatLevel = threats.threat1.level;
+            
+            document.getElementById('threat-name').innerHTML = 
+                `${tt(threatName)} (Level ${threatLevel})`;
+        } else {
+            document.getElementById('threat-name').textContent = 'No threat data available.';
+        }
+    </script>
+</body>
+</html>

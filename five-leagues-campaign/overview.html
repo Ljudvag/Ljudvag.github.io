@@ -5,12 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="tooltips.js"></script>
+    <script src="shared-utils.js"></script>
 </head>
 <body style="margin: 0; padding: 0;">
     <div style="padding: 20px; background-color: #000000; color: #ffffff;">
-        <h3 class="text-blue" style="margin-top: 0;">Campaign Overview</h3>
+        <h3 class="text-blue" style="margin-top: 0;" id="campaign-title">Loading...</h3>
         
         <p id="campaign-overview">Loading...</p>
+        
+        <hr style="border-color: #333; margin: 20px 0;">
+        
+        <div id="map-container"></div>
         
         <hr style="border-color: #333; margin: 20px 0;">
         
@@ -27,10 +32,27 @@
         
         // Load the appropriate campaign data file
         const script = document.createElement('script');
-        script.src = `c${campaignNum}-warband-data.js`;
+        script.src = `c${campaignNum}/warband-data.js?v=${Date.now()}`;
         script.onload = function() {
+            // Update campaign title
+            document.getElementById('campaign-title').textContent = campaignName;
+            
             // Update overview
             document.getElementById('campaign-overview').innerHTML = overview;
+            
+            // Load map data to calculate dynamic height
+            const mapScript = document.createElement('script');
+            mapScript.src = `c${campaignNum}/map-data.js`;
+            mapScript.onload = function() {
+                // Calculate map height: (rows * 32px) + padding (120px for title and margins)
+                const rows = mapData.sections.length / mapData.columns;
+                const mapHeight = (rows * 32) + 130;
+                
+                // Load map in iframe with dynamic height
+                document.getElementById('map-container').innerHTML = 
+                    `<iframe src="map.html?c=${campaignNum}" style="width: 100%; height: ${mapHeight}px; border: none;"></iframe>`;
+            };
+            document.head.appendChild(mapScript);
             
             // Display posts
             const fullCampaignId = '5Leagues-' + campaignNum;
@@ -42,8 +64,8 @@
             } else {
                 container.innerHTML = '<ul style="list-style: none; padding: 0;">' + 
                     posts.map(p => `<li style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #666;">
-                        <h3><a href="../blog/${p.url}" style="color: #0099ff;" target="_blank">${p.title}</a></h3>
-                        <p style="color: #999; font-size: 0.9em;">${p.date}</p>
+                        <h3><a href="../blog/${p.url}" class="text-blue" target="_blank">${p.title}</a></h3>
+                        <p class="text-grey" style="font-size: 0.9em;">${p.date}</p>
                         <p>${p.excerpt}</p></li>`).join('') + '</ul>';
             }
         };

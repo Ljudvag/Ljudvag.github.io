@@ -1,10 +1,13 @@
-// Campaign 0 Warband Data
-var campaignName = 'Template Campaign';
-var overview = `Campaign 0: This is a campaign template.
+// Campaign 1 Warband Data
+var campaignName = 'Wilhelms Hounds';
+var playerName = 'ljudvag';
+var regionName = 'Alter Erob';
+var overview = `<em>The Darkest Descent</em>
 
 <p>Stuff that needs to be added/fixed:
-<li>Story Events tracking</li>
-<li>Cool pixel hero for map</li>
+<li>Roll up warband. </li>
+<li>Roll Campaign -starts at page 70.</li>
+<li>Fix Cool pixel hero for map</li>
 </p>
 
 <p>You can use HTML tags like <strong>bold</strong> and <em>italic</em>.</p>`;
@@ -24,12 +27,24 @@ var quests = {
     active: [""],
     completed: [""]
 };
+var contracts = {
+    active: ["a nice contract."],
+    completed: [""]
+};
+var friends = ["bub"];
+
 var storyEvents = {
     Event1: {Name: "Better Part of Valor", Used: false},
     Event2: {Name: "A Lucky Break!", Used: false},
     Event3: {Name: "What About Old Friends?", Used: false},
     Event4: {Name: "I Don't Think That's How The Story Went...", Used: false},
     Event5: {Name: "Did I Ever Tell You How I Learned To Do This?", Used: false}
+};
+
+var threats = {
+    threat1: {name: "The Ruin Within", level: 5, revealed: false},
+    threat3: {name: "The Whispers from Beyond", level: 6, revealed: false},
+    threat2: {name: "The Curse of War", level: 5, revealed: false}
 };
 
 var warband = [

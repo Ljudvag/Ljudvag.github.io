@@ -1,5 +1,7 @@
 // Campaign 2 Warband Data
 var campaignName = 'Campaign Example';
+var playerName = 'Player Name';
+var regionName = 'Region Name';
 var overview = 'Campaign 2: This is an example campaign.';
 
 var warbandResources = {
@@ -17,6 +19,11 @@ var quests = {
     active: ["Grab sword"],
     completed: ["It's dangerous to go alone"]
 };
+var contracts = {
+    active: [""],
+    completed: [""]
+};
+var friends = [""];
 
 var storyEvents = {
     Event1: {Name: "Better Part of Valor", Used: false},
@@ -25,7 +32,11 @@ var storyEvents = {
     Event4: {Name: "I Don't Think That's How The Story Went...", Used: true},
     Event5: {Name: "Did I Ever Tell You How I Learned To Do This?", Used: false}
 };
-
+var threats = {
+    threat1: {name: "Threat 1 Name", level: 0, revealed: false},
+    threat2: {name: "Threat 2 Name", level: 0, revealed: false},
+    threat3: {name: "Threat 3 Name", level: 0, revealed: false}
+};
 var warband = [
     {
         type: "Avatar",
@@ -43,9 +54,9 @@ var warband = [
     {
         type: "Hero",
         name: "Hero McHerosson",
-        notes: "A skilled tracker from the elven forests",
-        origin: "Elf",
-        background: "Tracker",
+        notes: "Heroes are the best.",
+        origin: "Duskling",
+        background: "Outsider",
         level: 1,
         xp: 0,
         stats: { agility: 1, speed: "5 / +3", combat: "+1", tough: 3, luck: 0, casting: 0, will: 0 },
@@ -55,14 +66,14 @@ var warband = [
     },
     {
         type: "Follower",
-        name: "Warrior Name",
-        notes: "A loyal companion",
-        origin: "Elf",
-        background: "Tracker",
+        name: "Old McDonald",
+        notes: "Just a farmer looking for adventure",
+        origin: "Human",
+        background: "Brave Villager",
         level: 1,
         xp: 0,
         stats: { agility: 1, speed: 5, combat: "+1", tough: 3, luck: 0 },
-        proficiencies: ["Tracking +2", "Lucky"],
+        proficiencies: ["Speech +1", "Driven"],
         spells: [],
         equipment: ["Self Bow", "Dagger", "Light Armor"]
     }
