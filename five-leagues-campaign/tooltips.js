@@ -29,7 +29,8 @@ const tooltips = {
     // Proficiencies
     'Driven': 'Only race that can gain more than 1 point of Will (p.53). +2 XP when gaining Will from Advancement.',
     'Lucky Shot': '5+ to hit with ranged attacks if target is concealed or in cover.',
-    'Tough': 'Ignore first injury',
+    'Slip Away': 'Never have to roll on Flight in the Dark Table after a battle.',
+    'Lacking Strength': 'Cannot use Warhammers, Bastard Swords or Long Bows.',
     
     //Equipment
     'Backpack': 'Max 8 items. Cannot be used by temporary allies',
@@ -39,17 +40,19 @@ const tooltips = {
     'Improvised Weapon': 'Melee -1 / -1',
     'Unarmed': 'Melee -1 / -1',
     'Light Weapon': 'Melee -1 / +0',
-    'Self Bow': 'Ranged 18&quot; +0 / +0&#10; Bulky, Limited Ammunition',
+    'Self Bow': 'Ranged 18&quot; +0 / +0&#10; Cannot be used with Shield, Out of ammo on natural 1 to hit.',
     'Sling': 'Ranged 10&quot; -1 / +0',
-    'Staff': 'Melee +0 / +0&#10;Parry',
+    'Staff': 'Melee +0 / +0&#10;Parry (p.42)',
     'Standard Weapon': 'Melee +0 / +0',
     'Bastard Sword': 'Melee +0 / +1',
-    'Crossbow': 'Ranged 24&quot; +1 / +0&#10; Bulky, Limited Ammunition, Move or Shoot',
-    'Fencing Sword': 'Melee +0 / +0 &#10;Parry',
-    'Long Bow': 'Ranged 24&quot; +0 / +0&#10; Bulky, Limited Ammunition',
+    'Crossbow': 'Ranged 24&quot; +1 / +0&#10; Cannot be used with Shield,  Out of ammo on natural 1 to hit., Move or Shoot',
+    'Fencing Sword': 'Melee +0 / +0 &#10;Parry(p.42)',
+    'Long Bow': 'Ranged 24&quot; +0 / +0&#10; Cannot be used with Shield, Out of ammo on natural 1 to hit.',
     'Throwing Knives': 'Ranged 9&quot; -1 / +0&#10; Add Combat Skill even if moved.&#10; Once per battle, recovered if you Hold the Field',
     'Warhammer': 'Melee +1 / +0',
     'War Spear': 'Melee +0 / +0&#10; May always Counter Attack in melee.',
+    'Crossbow Pistol': 'Ranged 12&quot; +0 / +0&#10;Out of ammo on natural 1 to hit.&#10;Homebrew.',
+    'Blackpowder Pistol': 'Ranged 12&quot; +1 / +1&#10;Once per battle.&#10;Homebrew.',
     
 
     
@@ -68,8 +71,9 @@ const tooltips = {
     'Quality': 'Add +1 to damage rolls.',
     'Quick': 'Add +1 to attack rolls.',
     // Items
-    // Items can be either B (Backpack to be used), C (Consumable) or W (Worn by a character)
-    'Silvertree Leaf': 'Reroll one post-game Injury.&#10; If character would have initially died, increase recovery by 1d3 turns.&#10;No effect on rolls on Flight in the Dark table.',
+    // Items can be either S (Single Use),B (Backpack to be used), C (Consumable) or W (Worn by a character)
+    'Silvertree Leaf': 'Reroll one post-game Injury.&#10; If character would have initially died, increase recovery by 1d3 turns.&#10;No effect on rolls on Flight in the Dark table.&#10;Single Use. Can be used from Stash.',
+    'Congealed Strands': 'Used to cast spells, can be used in place of normal Strand.&#10;Single Use. Can be used from Stash.',
     //Spells
     
     // Add more as needed
