@@ -270,7 +270,7 @@ var mapData = {
          { image: 'images/32x32c/cloud2.png', clickable: false, alt: 'Cloud' },
          { image: 'images/32x32c/cloud2.png', clickable: false, alt: 'Cloud' },
          { image: 'images/32x32c/cloud2.png', clickable: false, alt: 'Cloud' },
-        // template row
+        // template rows
        // { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },  //1 
       // { image: 'images/32x32c/skull.png', clickable: false, alt: 'Skull' },  //2
       // { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //3
