@@ -53,7 +53,7 @@ var mapData = {
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //9
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //10
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //11
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' }, //12
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' }, //12
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //13
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //15
@@ -105,7 +105,7 @@ var mapData = {
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //4
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //5
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //6  
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },  //7
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },  //7
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //8
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //9
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //10
@@ -169,7 +169,7 @@ var mapData = {
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //10
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //11
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },    //12
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },   //13
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },   //13
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //15
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //16
@@ -183,12 +183,12 @@ var mapData = {
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //5
          { image: 'images/32x32c/camp.png', clickable: true, page: 'c1/camp-3.html', alt: 'camp 3' },   //6  
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //7
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },   //8
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },   //8
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //9
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //10
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //11
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },    //12
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },   //13
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },   //13
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //15
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //16
@@ -207,7 +207,7 @@ var mapData = {
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //10
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //11
         { image: 'images/32x32c/village.png', clickable: true, page: 'c1/village-1.html', alt: 'Hellion\'s Hope' },     //12
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },   //13
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },   //13
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //15
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //16
@@ -226,7 +226,7 @@ var mapData = {
         { image: 'images/32x32c/Skull.png', clickable: true,page:'c1/hideout-2.html', alt: 'hideout 2' },  //10
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //11
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //12
-        { image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },   //13
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },   //13
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //15
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //16
@@ -245,7 +245,7 @@ var mapData = {
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //10
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //11
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //12
-        //{ image: 'images/32x32c/road-I.png', clickable: false, alt: 'Road-I' },  //13
+        //{ image: 'images/32x32c/road-i.png', clickable: false, alt: 'Road-I' },  //13
         { image: 'images/32x32c/avatar.png', clickable: true, page: 'warband.html?c=1', alt: 'Avatar' }, //Current avatar position
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //15
