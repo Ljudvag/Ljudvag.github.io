@@ -52,7 +52,7 @@ var warband = [
 
         name: "Wilhelm von Basque", // Name of the character
         type: "Avatar", // Avatar, Hero, Follower, Dead/Retired
-        notes: "", // short desciption or notes
+        notes: "Drafted into the Witch hunters corps to cover up afamily scandal.", // short desciption or notes
         origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Noble", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: " At his side hangs a fine sword passed down by his family.", // Only for Avatar.
@@ -74,9 +74,9 @@ var warband = [
         // 1 Light Armor
     },
     {
-        name: "Caspina", // Name of the character
+        name: "Bella Le Gosi", // Name of the character
         type: "Hero", // Avatar, Hero, Follower, Dead/Retired
-        notes: "", // short desciption or notes
+        notes: "Exiled after accusations of grave robbing her late husbands grave. Nothing ever proven.", // short desciption or notes
         origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Townsfolk", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: "", // Only for Avatar.
@@ -100,7 +100,7 @@ var warband = [
     {
         name: "Mistlefoot", // Name of the character
         type: "Hero", // Avatar, Hero, Follower, Dead/Retired
-        notes: "", // short desciption or notes
+        notes: "Cast out of his home for being caught performing an unspeakable act.", // short desciption or notes
         origin: "Halfling   ", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Frontier", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: "", // Only for Avatar.
@@ -172,7 +172,7 @@ var warband = [
     {
         name: "Jebbie", // Name of the character
         type: "Follower", // Avatar, Hero, Follower, Dead/Retired
-        notes: "", // short desciption or notes
+        notes: "Once knocked out a city guard by using a fish as a cudgel.", // short desciption or notes
         origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Outcast Drifter", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: "", // Only for Avatar.
