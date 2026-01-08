@@ -144,7 +144,7 @@ var mapData = {
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //4
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //5
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //6  
-         { image: 'images/32x32c/road-right2.png', clickable: false, alt: 'Road-right2' },  //7
+        { image: 'images/32x32c/road-right2.png', clickable: false, alt: 'Road-right2' },  //7
         { image: 'images/32x32c/road-x.png', clickable: false, alt: 'Road-x' },   //8
         { image: 'images/32x32c/road-=.png', clickable: false, alt: 'Road-=' },  //9
         { image: 'images/32x32c/road-=.png', clickable: false, alt: 'Road-=' },   //10
