@@ -52,7 +52,7 @@ var warband = [
 
         name: "Wilhelm von Basque", // Name of the character
         type: "Avatar", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Drafted into the Witch hunters corps to cover up afamily scandal.", // short desciption or notes
+        notes: "Drafted into the Witch hunters corps to cover up a family scandal.", // short desciption or notes
         origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Noble", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: " At his side hangs a fine sword passed down by his family.", // Only for Avatar.
@@ -124,13 +124,13 @@ var warband = [
     {
         name: "Father Hammerzeit", // Name of the character
         type: "Hero", // Avatar, Hero, Follower, Dead/Retired
-        notes: "", // short desciption or notes
+        notes: "Orator and demagouge with a shadowy past.", // short desciption or notes
         origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Mystic", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: "", // Only for Avatar.
         level: 1,
         xp: 1,
-        stats: { agility: 1, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: +1, luck: 0 },
+        stats: { agility: 1, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: "+1", luck: 0 },
         proficiencies: ["+2 Speech", "Driven"],
         // Human: "Speech +1", "Driven"
         // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
@@ -148,7 +148,7 @@ var warband = [
     {
         name: "Jaala", // Name of the character
         type: "Follower", // Avatar, Hero, Follower, Dead/Retired
-        notes: "", // short desciption or notes
+        notes: "Intense and justified fear of cicadas.", // short desciption or notes
         origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
         background: "Deranged Wretch", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
         history: "", // Only for Avatar.
