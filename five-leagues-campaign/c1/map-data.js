@@ -281,7 +281,7 @@ var mapData = {
       //  { image: 'images/32x32c/church.png', clickable: false, alt: 'Church' },   //8
       //  { image: 'images/32x32c/hamlet.png', clickable: false, alt: 'Hamlet' },   //9    
       //  { image: 'images/32x32c/road-i.png', clickable: false, alt: 'road-i' },   //10
-      //  { image: 'images/32x32c/road-x.png', clickable: false, alt: 'road-X' },   //11
+      //  { image: 'images/32x32c/road-x.png', clickable: false, alt: 'road-x' },   //11
       //  { image: 'images/32x32c/road-right.png', clickable: false, alt: 'road-Right' },   //12
       //  { image: 'images/32x32c/road-left.png', clickable: false, alt: 'road-Left' },  //13
       //  { image: 'images/32x32c/road-left2.png', clickable: false, alt: 'road-Left2' },   //14
