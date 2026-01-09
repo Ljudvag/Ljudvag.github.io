@@ -52,7 +52,7 @@ var warband = [
 
         name: "Wilhelm von Basque",
         type: "Avatar",
-        notes: "Drafted into the Witch hunters corps to cover up a family scandal.",
+        notes: "Drafted into the Witch Hunters' corps to cover up a family scandal.",
         origin: "Human",
         background: "Noble",
         history: " At his side hangs a fine sword passed down by his family.",
@@ -66,7 +66,7 @@ var warband = [
     {
         name: "Bella Le Gosi",
         type: "Hero",
-        notes: "Exiled after accusations of grave robbing her late husbands grave. Nothing ever proven.",
+        notes: "Exiled after accusations of robbing her late husband's grave, though nothing was ever proven.",
         origin: "Human",
         background: "Townsfolk",
         history: "",
@@ -94,7 +94,7 @@ var warband = [
     {
         name: "Father Hammerzeit",
         type: "Hero",
-        notes: "Orator and demagouge with a shadowy past.",
+        notes: "Orator and demagogue with a shadowy past.",
         origin: "Human",
         background: "Mystic",
         history: "",
