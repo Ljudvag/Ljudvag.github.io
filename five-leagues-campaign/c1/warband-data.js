@@ -50,148 +50,109 @@ var threats = {
 var warband = [
     {
 
-        name: "Wilhelm von Basque", // Name of the character
-        type: "Avatar", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Drafted into the Witch hunters corps to cover up a family scandal.", // short desciption or notes
-        origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
-        background: "Noble", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
-        history: " At his side hangs a fine sword passed down by his family.", // Only for Avatar.
+        name: "Wilhelm von Basque",
+        type: "Avatar",
+        notes: "Drafted into the Witch hunters corps to cover up a family scandal.",
+        origin: "Human",
+        background: "Noble",
+        history: " At his side hangs a fine sword passed down by his family.",
         level: 1,
         xp: 2,
         stats: { agility: 2, speed: "4\" + 3\"", combat: "+1", tough: 3, will: 0, casting: 0, luck: 0 },
         proficiencies: ["Speech +1", "Driven"],
-        // Human: "Speech +1", "Driven"
-        // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
-        // Duskling: "Traveling +1", "Brute Charge", "Oath of Life", "Distrust"
-        // Preen: "Crafting +1", "Outburst","Swift-footed","Slight"
-        // Halfling: "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"
-        // Feral: "Scouting +1", "Hunting instincts", "Loping run", "Alien"
-        spells: [], // If Mystic - Pick 2 and roll 3
-        equipment: ["Blackpowder Pistol","Standard Weapon (Fine)", "Partial Armor"] // Heroes: 2 Quality Weapons, 2 Basic Weapons. Max 2 Ranged.
-        // 2 partial Armor, 2 Light Armor, 1 Helmet, 1 Shield.
-        // OR: 1 Full Armor, 1 Partial Armor, 1 Light Armor
-        // Followers: Standard Weapon or Staff. Self-bow and Light weapon if not maxed out on ranged.
-        // 1 Light Armor
+        spells: [],
+        equipment: ["Blackpowder Pistol","Standard Weapon (Fine)", "Partial Armor"]
     },
     {
-        name: "Bella Le Gosi", // Name of the character
-        type: "Hero", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Exiled after accusations of grave robbing her late husbands grave. Nothing ever proven.", // short desciption or notes
-        origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
-        background: "Townsfolk", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
-        history: "", // Only for Avatar.
+        name: "Bella Le Gosi",
+        type: "Hero",
+        notes: "Exiled after accusations of grave robbing her late husbands grave. Nothing ever proven.",
+        origin: "Human",
+        background: "Townsfolk",
+        history: "",
         level: 1,
         xp: 0,
         stats: { agility: 1, speed: "6\" + 3\"", combat: "+1", tough: 3, will: 2, casting: 0, luck: 0 },
         proficiencies: ["Speech +1", "Driven", "Battlewise +2" ],
-        // Human: "Speech +1", "Driven"
-        // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
-        // Duskling: "Traveling +1", "Brute Charge", "Oath of Life", "Distrust"
-        // Preen: "Crafting +1", "Outburst","Swift-footed","Slight"
-        // Halfling: "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"
-        // Feral: "Scouting +1", "Hunting instincts", "Loping run", "Alien"
-        spells: [], // If Mystic - Pick 2 and roll 3
-        equipment: ["Crossbow Pistol","Fencing Sword", "Light Armor"] // Heroes: 2 Quality Weapons, 2 Basic Weapons. Max 2 Ranged.
-        // 2 partial Armor, 2 Light Armor, 1 Helmet, 1 Shield.
-        // OR: 1 Full Armor, 1 Partial Armor, 1 Light Armor
-        // Followers: Standard Weapon or Staff. Self-bow and Light weapon if not maxed out on ranged.
-        // 1 Light Armor
+        spells: [],
+        equipment: ["Crossbow Pistol","Fencing Sword", "Light Armor"]
     },
     {
-        name: "Mistlefoot", // Name of the character
-        type: "Hero", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Cast out of his home for being caught performing an unspeakable act.", // short desciption or notes
-        origin: "Halfling   ", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
-        background: "Frontier", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
-        history: "", // Only for Avatar.
+        name: "Mistlefoot",
+        type: "Hero",
+        notes: "Cast out of his home for being caught performing an unspeakable act.",
+        origin: "Halfling   ",
+        background: "Frontier",
+        history: "",
         level: 1,
         xp: 2,
         stats: { agility: 2, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: 0, luck: 0 },
         proficiencies: [ "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"],
-        // Human: "Speech +1", "Driven"
-        // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
-        // Duskling: "Traveling +1", "Brute Charge", "Oath of Life", "Distrust"
-        // Preen: "Crafting +1", "Outburst","Swift-footed","Slight"
-        // Halfling: "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"
-        // Feral: "Scouting +1", "Hunting instincts", "Loping run", "Alien"
-        spells: [], // If Mystic - Pick 2 and roll 3
-        equipment: ["Self Bow", "Light Armor", "Helmet"] // Heroes: 2 Quality Weapons, 2 Basic Weapons. Max 2 Ranged.
-        // 2 partial Armor, 2 Light Armor, 1 Helmet, 1 Shield.
-        // OR: 1 Full Armor, 1 Partial Armor, 1 Light Armor
-        // Followers: Standard Weapon or Staff. Self-bow and Light weapon if not maxed out on ranged.
-        // 1 Light Armor
+        spells: [],
+        equipment: ["Self Bow", "Light Armor", "Helmet"]
     },
     {
-        name: "Father Hammerzeit", // Name of the character
-        type: "Hero", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Orator and demagouge with a shadowy past.", // short desciption or notes
-        origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
-        background: "Mystic", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
-        history: "", // Only for Avatar.
+        name: "Father Hammerzeit",
+        type: "Hero",
+        notes: "Orator and demagouge with a shadowy past.",
+        origin: "Human",
+        background: "Mystic",
+        history: "",
         level: 1,
         xp: 1,
         stats: { agility: 1, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: "+1", luck: 0 },
         proficiencies: ["+2 Speech", "Driven"],
-        // Human: "Speech +1", "Driven"
-        // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
-        // Duskling: "Traveling +1", "Brute Charge", "Oath of Life", "Distrust"
-        // Preen: "Crafting +1", "Outburst","Swift-footed","Slight"
-        // Halfling: "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"
-        // Feral: "Scouting +1", "Hunting instincts", "Loping run", "Alien"
-        spells: [], // If Mystic - Pick 2 and roll 3
-        equipment: ["Warhammer","Shield","Light Armor","2 Congealed Strands"] // Heroes: 2 Quality Weapons, 2 Basic Weapons. Max 2 Ranged.
-        // 2 partial Armor, 2 Light Armor, 1 Helmet, 1 Shield.
-        // OR: 1 Full Armor, 1 Partial Armor, 1 Light Armor
-        // Followers: Standard Weapon or Staff. Self-bow and Light weapon if not maxed out on ranged.
-        // 1 Light Armor
+        spells: [],
+        equipment: ["Warhammer","Shield","Light Armor","2 Congealed Strands"]
     },
     {
-        name: "Jaala", // Name of the character
-        type: "Follower", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Intense and justified fear of cicadas.", // short desciption or notes
-        origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
-        background: "Deranged Wretch", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
-        history: "", // Only for Avatar.
+        name: "Jaala",
+        type: "Follower",
+        notes: "Intense and justified fear of cicadas.",
+        origin: "Human",
+        background: "Deranged Wretch",
+        history: "",
         level: 1,
         xp: 0,
         stats: { agility: 1, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: 0, luck: 0 },
         proficiencies: ["Speech +1", "Driven"],
-        // Human: "Speech +1", "Driven"
-        // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
-        // Duskling: "Traveling +1", "Brute Charge", "Oath of Life", "Distrust"
-        // Preen: "Crafting +1", "Outburst","Swift-footed","Slight"
-        // Halfling: "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"
-        // Feral: "Scouting +1", "Hunting instincts", "Loping run", "Alien"
-        spells: [], // If Mystic - Pick 2 and roll 3
-        equipment: ["Standard Weapon", "Light Armor"] // Heroes: 2 Quality Weapons, 2 Basic Weapons. Max 2 Ranged.
-        // 2 partial Armor, 2 Light Armor, 1 Helmet, 1 Shield.
-        // OR: 1 Full Armor, 1 Partial Armor, 1 Light Armor
-        // Followers: Standard Weapon or Staff. Self-bow and Light weapon if not maxed out on ranged.
-        // 1 Light Armor
-    }, // Don't forget to remove the comma for the last member
+        spells: [],
+        equipment: ["Standard Weapon", "Light Armor"]
+    },
     {
-        name: "Jebbie", // Name of the character
-        type: "Follower", // Avatar, Hero, Follower, Dead/Retired
-        notes: "Once knocked out a city guard by using a fish as a cudgel.", // short desciption or notes
-        origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
-        background: "Outcast Drifter", // Frontier (Halfling, Human), Mystic (One), Noble (Human), Outsider (Fey-blood, Duskling), Townsfolk (Human, Preen, Feral), Zealot (Human)
-        history: "", // Only for Avatar.
+        name: "Jebbie",
+        type: "Follower",
+        notes: "Once knocked out a city guard by using a fish as a cudgel.",
+        origin: "Human",
+        background: "Outcast Drifter",
+        history: "",
         level: 1,
         xp: 0,
         stats: { agility: 1, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: 0, luck: 0 },
         proficiencies: ["Speech +1", "Driven"],
+        spells: [],
+        equipment: ["Standard Weapon"] 
+    }
+    // Add more members here
+        // {
+
+        //name: "Follower 2", // Name of the character
+        //type: "Follower", // Avatar, Hero, Follower, Dead/Retired
+        //notes: "", // short desciption or notes
+        //origin: "Human", // Human, Fey-blood, Duskling, Preen, Halfling, Feral
+        //background: "", // Roll on Follower table.
+        //history: "", // Only for Avatar.
+        //level: 1,
+        //xp: 0,
+        //stats: { agility: 1, speed: "4\" + 3\"", combat: "+0", tough: 3, will: 0, casting: 0, luck: 0 },
+        //proficiencies: ["+1 Speech, Driven"],
         // Human: "Speech +1", "Driven"
         // Fey-blood: "Wits +1", "Foresight", "Aura of Winter", "Cursed"
         // Duskling: "Traveling +1", "Brute Charge", "Oath of Life", "Distrust"
         // Preen: "Crafting +1", "Outburst","Swift-footed","Slight"
         // Halfling: "Wilderness +1", "Lucky Shot", "Slip Away", "Lacking Strength"
         // Feral: "Scouting +1", "Hunting instincts", "Loping run", "Alien"
-        spells: [], // If Mystic - Pick 2 and roll 3
-        equipment: ["Standard Weapon"] // Heroes: 2 Quality Weapons, 2 Basic Weapons. Max 2 Ranged.
-        // 2 partial Armor, 2 Light Armor, 1 Helmet, 1 Shield.
-        // OR: 1 Full Armor, 1 Partial Armor, 1 Light Armor
-        // Followers: Standard Weapon or Staff. Self-bow and Light weapon if not maxed out on ranged.
-        // 1 Light Armor
-    } // Don't forget to remove the comma for the last member
-    // Add more members here
+        //spells: [], // If Mystic - Pick 2 and roll 3
+        //equipment: [""] 
+    //}, // Don't forget to remove the comma for the last member
 ];
