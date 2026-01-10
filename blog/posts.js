@@ -1,6 +1,15 @@
 // Blog posts data
 const blogPosts = [
   {
+    "id": "5leagues-1-1",
+    "title": "Wilhelms hounds - Campaign turn 1",
+    "date": "2026-01-10",
+    "category": "5Leagues-1",
+    "excerpt": "We have arrived in Alter Erob.",
+    "url": "5leagues-1-1.html"
+  },
+
+  {
     "id": "5leagues-0-1",
     "title": "Testing the Campaign System",
     "date": "2026-01-04",

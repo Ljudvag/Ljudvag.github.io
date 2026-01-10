@@ -207,7 +207,8 @@ var mapData = {
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //10
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //11
         { image: 'images/32x32c/village.png', clickable: true, page: 'c1/village-1.html', alt: 'Hellion\'s Hope' },     //12
-        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'road-i' },   //13
+       // { image: 'images/32x32c/road-i.png', clickable: false, alt: 'road-i' },   //13
+        { image: 'images/32x32c/avatar.png', clickable: true, page: 'warband.html?c=1', alt: 'Avatar' }, //Current avatar position
         { image: 'images/32x32c/grass.png', clickable: false, alt: 'Grass' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //15
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' }, //16
@@ -245,8 +246,7 @@ var mapData = {
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //10
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //11
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //12
-        //{ image: 'images/32x32c/road-i.png', clickable: false, alt: 'road-i' },  //13
-        { image: 'images/32x32c/avatar.png', clickable: true, page: 'warband.html?c=1', alt: 'Avatar' }, //Current avatar position
+        { image: 'images/32x32c/road-i.png', clickable: false, alt: 'road-i' },  //13
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //14
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //15
         { image: 'images/32x32c/forest.png', clickable: false, alt: 'Forest' },   //16
