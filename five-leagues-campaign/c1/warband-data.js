@@ -13,7 +13,7 @@ var overview = `<em>The Darkest Descent</em>
 <p>You can use HTML tags like <strong>bold</strong> and <em>italic</em>.</p>`;
 
 var warbandResources = {
-    storyPoints: 3, //3 Starting story points
+    storyPoints: 4, //3 Starting story points
     adventurePoints: 0, // Starting adventure points
     goldMarks: 6 //3 Starting gold marks
 };
