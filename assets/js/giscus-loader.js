@@ -37,7 +37,7 @@
     giscusScript.setAttribute('data-reactions-enabled', '1');
     giscusScript.setAttribute('data-emit-metadata', '1');
     giscusScript.setAttribute('data-input-position', 'bottom');
-    giscusScript.setAttribute('data-theme', 'light');
+    giscusScript.setAttribute('data-theme', window.location.origin + '/assets/css/giscus-theme.css');
     giscusScript.setAttribute('data-lang', 'en');
     giscusScript.setAttribute('crossorigin', 'anonymous');
     giscusScript.async = true;

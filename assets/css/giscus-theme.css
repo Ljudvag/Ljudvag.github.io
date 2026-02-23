@@ -1,0 +1,107 @@
+main {
+  --color-prettylights-syntax-comment: #999999;
+  --color-prettylights-syntax-constant: #2fa5f4;
+  --color-prettylights-syntax-entity: #f71b9c;
+  --color-prettylights-syntax-storage-modifier-import: #ffffff;
+  --color-prettylights-syntax-entity-tag: #00cc00;
+  --color-prettylights-syntax-keyword: #f71b9c;
+  --color-prettylights-syntax-string: #2fa5f4;
+  --color-prettylights-syntax-variable: #00cc00;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f71b9c;
+  --color-prettylights-syntax-invalid-illegal-text: #ffffff;
+  --color-prettylights-syntax-invalid-illegal-bg: #330000;
+  --color-prettylights-syntax-carriage-return-text: #ffffff;
+  --color-prettylights-syntax-carriage-return-bg: #330000;
+  --color-prettylights-syntax-string-regex: #00cc00;
+  --color-prettylights-syntax-markup-list: #2fa5f4;
+  --color-prettylights-syntax-markup-heading: #2fa5f4;
+  --color-prettylights-syntax-markup-italic: #ffffff;
+  --color-prettylights-syntax-markup-bold: #ffffff;
+  --color-prettylights-syntax-markup-deleted-text: #ffcccc;
+  --color-prettylights-syntax-markup-deleted-bg: #660000;
+  --color-prettylights-syntax-markup-inserted-text: #b8ffb8;
+  --color-prettylights-syntax-markup-inserted-bg: #003300;
+  --color-prettylights-syntax-markup-changed-text: #ffdca8;
+  --color-prettylights-syntax-markup-changed-bg: #663300;
+  --color-prettylights-syntax-markup-ignored-text: #ffffff;
+  --color-prettylights-syntax-markup-ignored-bg: #2fa5f4;
+  --color-prettylights-syntax-meta-diff-range: #f71b9c;
+  --color-prettylights-syntax-brackethighlighter-angle: #999999;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #666666;
+  --color-prettylights-syntax-constant-other-reference-link: #2fa5f4;
+
+  --color-fg-default: #ffffff;
+  --color-fg-muted: #cccccc;
+  --color-fg-subtle: #999999;
+
+  --color-canvas-default: #000000;
+  --color-canvas-overlay: #000000;
+  --color-canvas-inset: #111111;
+  --color-canvas-subtle: #111111;
+
+  --color-border-default: #ffffff;
+  --color-border-muted: #666666;
+  --color-neutral-muted: #66666666;
+
+  --color-accent-fg: #2fa5f4;
+  --color-accent-emphasis: #2fa5f4;
+  --color-accent-muted: #2fa5f466;
+  --color-accent-subtle: #2fa5f422;
+
+  --color-success-fg: #00cc00;
+  --color-attention-fg: #2fa5f4;
+  --color-attention-muted: #2fa5f466;
+  --color-attention-subtle: #2fa5f422;
+  --color-danger-fg: #f71b9c;
+  --color-danger-muted: #f71b9c66;
+  --color-danger-subtle: #f71b9c22;
+
+  --color-primer-shadow-inset: none;
+  --color-scale-gray-7: #333333;
+  --color-scale-blue-8: #2fa5f4;
+
+  --color-btn-text: #ffffff;
+  --color-btn-bg: #000000;
+  --color-btn-border: #ffffff;
+  --color-btn-hover-bg: #333333;
+  --color-btn-hover-border: #ffffff;
+  --color-btn-active-bg: #333333;
+  --color-btn-active-border: #ffffff;
+  --color-btn-selected-bg: #333333;
+
+  --color-btn-primary-text: #000000;
+  --color-btn-primary-bg: #00cc00;
+  --color-btn-primary-border: #00cc00;
+  --color-btn-primary-hover-bg: #00dd00;
+  --color-btn-primary-hover-border: #00dd00;
+  --color-btn-primary-selected-bg: #00cc00;
+  --color-btn-primary-selected-shadow: none;
+  --color-btn-primary-disabled-text: #333333;
+  --color-btn-primary-disabled-bg: #66aa66;
+  --color-btn-primary-disabled-border: #66aa66;
+
+  --color-social-reaction-bg-hover: #333333;
+  --color-social-reaction-bg-reacted-hover: #2fa5f4;
+}
+
+main,
+.gsc-main,
+.gsc-comment-box,
+.gsc-comment,
+.gsc-replies {
+  font-family: 'VT323', monospace;
+  font-size: 1.1rem;
+}
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.gsc-reactions-count {
+  display: none;
+}
