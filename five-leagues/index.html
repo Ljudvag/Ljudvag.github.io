@@ -1,157 +1,309 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Five Leagues Campaign - Ljudvag</title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="mobile.css">
+    <style>
+      /* ---- Five Leagues campaign hub: retro-RPG console layout ---- */
+      .fl-cabinet{
+        max-width:1180px; margin:0 auto; background:#000;
+        border:3px solid #fff; box-shadow:5px 5px 0 #333; padding:16px;
+      }
+      .fl-topbar{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;}
+      .fl-topbar .home{color:#888; text-decoration:none; font-size:0.85em;}
+      .fl-topbar .home:hover{color:#fff;}
+      .fl-camps span{color:var(--fl-blue,#2fa5f4); margin-right:8px;}
+      .fl-camps button{
+        background:#f71b9c; color:#000; border:2px solid #f71b9c; cursor:pointer;
+        font-family:inherit; font-size:0.7em; padding:5px 9px; margin-right:6px;
+      }
+      .fl-camps button.tpl{background:#666; border-color:#666;}
+      .fl-camps button.active{border-color:#00ff00;}
+
+      .fl-titlebar{
+        text-align:center; letter-spacing:2px; font-weight:bold; text-transform:uppercase;
+        border:3px solid #fff; padding:10px; margin-bottom:14px; text-shadow:2px 2px #000;
+      }
+      .fl-titlebar .region{color:#2fa5f4; font-size:0.55em; display:block; letter-spacing:1px; margin-top:6px;}
+
+      .fl-toprow{display:grid; grid-template-columns:280px 1fr 190px; gap:14px;}
+      .fl-panel{border:2px solid #fff; background:#000; padding:11px;}
+      .fl-panel h3{
+        margin:0 0 9px; font-size:0.6em; letter-spacing:2px; text-transform:uppercase;
+        color:#00cc00; border-bottom:1px solid #333; padding-bottom:6px;
+        display:flex; justify-content:space-between; align-items:baseline;
+      }
+      .fl-panel h3 .mode{font-size:0.85em; letter-spacing:1px;}
+      .mode-char{color:#00cc00;} .mode-loc{color:#ffd24a;}
+
+      /* LEFT inspector */
+      #fl-insName{font-size:1.2em; margin:0 0 2px;}
+      .fl-tag{font-size:0.8em; color:#999; font-style:italic; display:block; margin-bottom:9px;}
+      .fl-meta{display:grid; grid-template-columns:1fr 1fr; gap:3px 8px; font-size:0.85em; margin-bottom:10px;}
+      .fl-meta .lbl{color:#999;}
+      .fl-statgrid{display:grid; grid-template-columns:1fr 1fr; gap:5px 10px; font-size:0.9em; margin-bottom:10px;}
+      .fl-statgrid > div{border-bottom:1px dotted #333; padding-bottom:2px;}
+      .fl-statgrid .k{color:#2fa5f4;} .fl-statgrid .v{color:#fff; float:right;}
+      .fl-sub{font-size:0.8em; margin:8px 0 0;}
+      .fl-sub .lbl{color:#00cc00; display:block; letter-spacing:1px;}
+      .fl-locframe{width:100%; height:430px; border:none; display:block; background:#000;}
+
+      /* CENTER swappable screen */
+      .fl-viewport{border:2px dotted #ff00ff; padding:12px; background:#000; height:460px; overflow:auto;}
+      .fl-mapgrid{display:grid; justify-content:center; line-height:0; font-size:0;}
+      .fl-mapgrid img{width:32px; height:32px; display:block; box-sizing:border-box;}
+      .fl-mapgrid a img{cursor:pointer; border:2px solid #ff00ff;}
+      .fl-mapgrid a:hover img{filter:brightness(1.6);}
+      .fl-screenframe{width:100%; height:100%; border:none; display:block;}
+      .fl-maplegend{font-size:0.7em; margin-top:9px; color:#999; text-align:center;}
+      .fl-maplegend b{color:#fff;}
+
+      /* RIGHT actions + resources */
+      .fl-cmd a{
+        display:block; color:#fff; text-decoration:none; border:1px solid #fff; cursor:pointer;
+        padding:7px 8px; margin-bottom:6px; text-align:center; font-size:0.75em;
+        text-transform:uppercase; letter-spacing:2px;
+      }
+      .fl-cmd a:hover{background:#333;}
+      .fl-cmd a.active{background:#00cc00; color:#000; border-color:#00cc00;}
+      .fl-counter{border:2px solid #fff; background:#000; padding:6px 9px; margin-top:8px; display:flex; justify-content:space-between; font-size:0.85em;}
+      .fl-counter .n{color:#00cc00; font-weight:bold;}
+      .fl-counter.gold .n{color:#ffd24a;} .fl-counter.story .n{color:#2fa5f4;}
+
+      /* last-turn band */
+      .fl-logband{margin:14px 0; padding:10px 13px; font-size:0.85em; color:#bfe3ff; background:#04121f; border:2px solid #0099ff;}
+      .fl-logband .who{color:#2fa5f4; font-weight:bold;}
+      .fl-logband .turnlink{color:#ffd24a; text-decoration:none; font-weight:bold; white-space:nowrap; margin-left:6px;}
+      .fl-logband .turnlink:hover{text-decoration:underline;}
+
+      /* roster band */
+      .fl-roster{display:grid; grid-template-columns:repeat(3,1fr); gap:9px;}
+      .fl-pc{border:2px solid #444; background:#080808; padding:8px 11px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;}
+      .fl-pc:hover{border-color:#fff;}
+      .fl-pc.active{border-color:#f71b9c; box-shadow:0 0 12px rgba(247,27,156,.55);}
+      .fl-pc .nm{font-size:0.95em;}
+      .fl-pc .ty{font-size:0.6em; color:#999; display:block; text-transform:uppercase; letter-spacing:1px;}
+      .fl-pc .hp{font-size:1.15em; color:#00cc00; font-weight:bold;}
+      .fl-pc.av .nm{color:#2fa5f4;} .fl-pc.he .nm{color:#00cc00;} .fl-pc.fo .nm{color:#f71b9c;} .fl-pc.dead .nm{color:#999;}
+
+      @media (max-width:820px){
+        .fl-toprow{grid-template-columns:1fr;}
+        .fl-roster{grid-template-columns:1fr 1fr;}
+        .fl-viewport{height:auto; min-height:460px;}
+      }
+    </style>
 </head>
 <body>
-    <div style="display: flex; gap: 20px; max-width: 1400px; margin: 0 auto;">
-        <div class="container" style="width: 75%;">
-            <h1>Five Leagues Campaign</h1>
-            
-            <!-- Five Leagues focused menu, with a tucked-away link back to the main site. -->
-            <div style="text-align: right; font-size: 0.85em; margin: 5px 0;">
-                <a href="/" style="color: #888; text-decoration: none;">&larr; Ljudvag home</a>
+    <div class="fl-cabinet">
+        <div class="fl-topbar">
+            <span class="fl-camps">
+                <span>Campaign:</span>
+                <button class="campaign-btn" data-campaign="5Leagues-1" onclick="loadCampaign('5Leagues-1')">Wilhelms Hounds</button>
+                <button class="campaign-btn" data-campaign="5Leagues-2" onclick="loadCampaign('5Leagues-2')">Example</button>
+                <button class="campaign-btn tpl" data-campaign="5Leagues-0" onclick="loadCampaign('5Leagues-0')">Template</button>
+            </span>
+            <a class="home" href="/">&larr; Ljudvag home</a>
+        </div>
+
+        <div class="fl-titlebar">
+            Five Leagues &mdash; <span id="fl-campTitle">Campaign</span>
+            <span class="region" id="fl-regionLine"></span>
+        </div>
+
+        <div class="fl-toprow">
+            <!-- LEFT: shared inspector (character or location) -->
+            <div class="fl-panel">
+                <h3><span id="fl-leftLabel">Inspector</span><span class="mode" id="fl-leftMode"></span></h3>
+                <div id="fl-insBody"></div>
             </div>
-            <nav class="menu-bar">
-                <ul>
-                    <li><a href="/five-leagues/">Campaign Hub</a></li>
-                    <li><a href="/five-leagues/turns/">Turns</a></li>
-                </ul>
-            </nav>
-            
-            <div class="border-blue" style="padding: 10px; margin-top: 10px; text-align: center;">
-                <span class="text-blue" style="margin-right: 15px;"><strong>Campaigns:</strong></span>
-                <button onclick="loadCampaign('5Leagues-1')" class="bg-pink campaign-btn" data-campaign="5Leagues-1" style="margin-right: 10px; padding: 5px 10px; cursor: pointer;">Wilhelms Hounds</button>
-                <button onclick="loadCampaign('5Leagues-2')" class="bg-pink campaign-btn" data-campaign="5Leagues-2" style="margin-right: 10px; padding: 5px 10px; cursor: pointer;">Example</button>
-                <button onclick="loadCampaign('5Leagues-0')" class="bg-grey campaign-btn" data-campaign="5Leagues-0" style="padding: 5px 10px; cursor: pointer;">Campaign Template</button>
-            </div>
-            
-            <div class="border-green" style="padding: 10px; margin-top: 10px; text-align: center;">
-                <a href="javascript:void(0)" onclick="showOverview()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Overview</a>
-                <a href="javascript:void(0)" onclick="showMap()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Map</a>
-                <a href="javascript:void(0)" onclick="showAdventure()" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Adventure</a>
-                <a id="warband-sidebar-link" href="warband.html?c=1" target="sidebar-general" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Warband</a>
-                <a id="stash-sidebar-link" href="stash.html?c=1" target="sidebar-general" class="text-green" style="text-decoration: none; font-weight: bold; margin-right: 15px;">Stash</a>
-                <a href="/five-leagues/turns/" class="text-green" style="text-decoration: none; font-weight: bold;">Turns</a>
-            </div>
-            
-            <div class="content-box" style="margin-top: 20px;">
-                <div id="campaign-content">
-                    <!-- Map or other content will load here -->
+
+            <!-- CENTER: swappable main screen -->
+            <div class="fl-panel">
+                <h3 id="fl-centerTitle">The Region</h3>
+                <div class="fl-viewport" id="fl-centerView"></div>
+                <div class="fl-maplegend" id="fl-legend">
+                    Click a <b style="color:#ff00ff;">magenta-bordered</b> location to inspect it in the left frame.
                 </div>
             </div>
-            
-            <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
-                <a href="../index.html">Back to Home</a>
+
+            <!-- RIGHT: actions + resources -->
+            <div class="fl-panel fl-cmd">
+                <h3>Actions</h3>
+                <a id="fl-a-map"       onclick="setCenter('map')">Map</a>
+                <a id="fl-a-overview"  onclick="setCenter('overview')">Overview</a>
+                <a id="fl-a-adventure" onclick="setCenter('adventure')">Adventure</a>
+                <a id="fl-a-stash"     onclick="setCenter('stash')">Stash</a>
+                <a id="fl-a-dice"      onclick="setCenter('dice')">Dice</a>
+                <a href="/five-leagues/turns/">Turns</a>
+                <div class="fl-counter story"><span>Story</span><span class="n" id="fl-rStory">0</span></div>
+                <div class="fl-counter"><span>Adv. Pts</span><span class="n" id="fl-rAdv">0</span></div>
+                <div class="fl-counter gold"><span>Gold Mk</span><span class="n" id="fl-rGold">0</span></div>
             </div>
         </div>
-        
-        <div style="width: 25%; display: flex; flex-direction: column; gap: 20px; align-self: flex-start; margin-top: 0px; flex-shrink: 0;">
-            <div style="border: 2px solid #ffffff; background-color: #000000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-                <iframe name="sidebar-dice-roller" src="dice-roller.html" style="width: 100%; height: 250px; border: none; display: block;"></iframe>
-            </div>
-            
-            <div style="border: 2px solid #ffffff; background-color: #000000; box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
-                <iframe name="sidebar-general" src="warband.html?c=1" style="width: 100%; height: 1400px; border: none; display: block;"></iframe>
-            </div>
+
+        <!-- last turn -->
+        <div class="fl-logband" id="fl-logband"></div>
+
+        <!-- warband roster -->
+        <div class="fl-panel">
+            <h3>Warband &mdash; click a member</h3>
+            <div class="fl-roster" id="fl-roster"></div>
+        </div>
+
+        <!-- guestbook (giscus) mounts here -->
+        <div id="guestbook-host"></div>
+
+        <div style="text-align:center; margin-top:20px; font-size:0.9em; color:#666;">
+            &copy; 2026 Ljudvag &mdash; Five Leagues
         </div>
     </div>
-    
+
     <script src="posts.js"></script>
     <script src="tooltips.js"></script>
-    
+    <script src="shared-utils.js"></script>
     <script>
         let currentCampaign = '5Leagues-1';
-        
-        function loadCampaignData(campaignNum) {
-            return new Promise((resolve, reject) => {
-                const existingScript = document.getElementById('campaign-data-script');
-                if (existingScript) existingScript.remove();
-                
-                const errorData = {
-                    campaignName: 'Campaign ' + campaignNum,
-                    overview: 'Error loading campaign data.',
-                    resources: { storyPoints: 0, adventurePoints: 0, goldMarks: 0 },
-                    questsData: { active: [], completed: [] },
-                    storyEvents: {}
-                };
-                
-                const script = document.createElement('script');
-                script.id = 'campaign-data-script';
-                script.src = `c${campaignNum}/warband-data.js`;
-                
-                script.onload = () => {
-                    try {
-                        const campaignData = {
-                            campaignName: campaignName,
-                            overview: overview,
-                            resources: warbandResources,
-                            questsData: quests,
-                            storyEvents: storyEvents
-                        };
-                        resolve(campaignData);
-                    } catch (error) {
-                        console.error('Error accessing campaign data:', error);
-                        resolve(errorData);
-                    }
-                };
-                
-                script.onerror = () => {
-                    console.error('Error loading campaign data file');
-                    resolve(errorData);
-                };
-                
-                document.head.appendChild(script);
+
+        function campNum(){ return currentCampaign.split('-')[1]; }
+        function typeClass(t){ return t==='Avatar'?'av' : t==='Hero'?'he' : t==='Follower'?'fo' : 'dead'; }
+        function renderList(items){ return items.map(function(i){ return renderItem(i); }).join(', '); }
+
+        // ---- LEFT FRAME: character ----
+        function statRow(k,v){ return '<div><span class="k">'+k+'</span><span class="v">'+v+'</span></div>'; }
+        function renderCharacter(i){
+            var c = warband[i], s = c.stats;
+            var color = c.type==='Avatar'?'#2fa5f4' : c.type==='Hero'?'#00cc00' : c.type==='Follower'?'#f71b9c' : '#999';
+            var h = '<div id="fl-insName" style="color:'+color+'">'+c.name+'</div>';
+            if(c.notes) h += '<span class="fl-tag">'+c.notes+'</span>';
+            h += '<div class="fl-meta">'
+               + '<div><span class="lbl">Origin</span> '+renderItem(c.origin.trim())+'</div>'
+               + '<div><span class="lbl">Lvl</span> '+c.level+'</div>'
+               + '<div><span class="lbl">Backgr.</span> '+c.background+'</div>'
+               + '<div><span class="lbl">XP</span> '+c.xp+'</div></div>';
+            h += '<div class="fl-statgrid">'
+               + statRow('AGI',s.agility)+statRow('SPD',s.speed)+statRow('CMB',s.combat)
+               + statRow('TGH',s.tough)+statRow('WIL',s.will)+statRow('LCK',s.luck)+statRow('CST',s.casting)+'</div>';
+            if(c.proficiencies && c.proficiencies.length)
+                h += '<p class="fl-sub"><span class="lbl">Proficiencies</span>'+renderList(c.proficiencies)+'</p>';
+            if(c.spells && c.spells.length)
+                h += '<p class="fl-sub"><span class="lbl">Spells</span>'+renderList(c.spells)+'</p>';
+            if(c.equipment && c.equipment.length)
+                h += '<p class="fl-sub"><span class="lbl">Equipment</span>'+renderList(c.equipment)+'</p>';
+            document.getElementById('fl-insBody').innerHTML = h;
+            document.getElementById('fl-leftLabel').textContent = 'Character';
+            document.getElementById('fl-leftMode').innerHTML = '<span class="mode-char">Character</span>';
+            document.querySelectorAll('.fl-pc').forEach(function(el,idx){ el.classList.toggle('active', idx===i); });
+        }
+
+        // ---- LEFT FRAME: location (load existing location page in an iframe) ----
+        function renderLocation(page, label){
+            document.getElementById('fl-insBody').innerHTML =
+                '<iframe class="fl-locframe" src="'+page+'"></iframe>';
+            document.getElementById('fl-leftLabel').textContent = 'Location';
+            document.getElementById('fl-leftMode').innerHTML = '<span class="mode-loc">'+(label||'Location')+'</span>';
+            document.querySelectorAll('.fl-pc').forEach(function(el){ el.classList.remove('active'); });
+        }
+
+        // ---- CENTER: map (rendered inline from mapData) ----
+        function mapHTML(){
+            if(typeof mapData === 'undefined' || !mapData){ return '<p class="text-grey">No map for this campaign.</p>'; }
+            var html = '<div class="fl-mapgrid" style="grid-template-columns:repeat('+mapData.columns+',32px);">';
+            mapData.sections.forEach(function(sec){
+                var img = '<img src="'+sec.image+'" alt="'+(sec.alt||'')+'">';
+                if(sec.clickable && sec.page){
+                    var safe = (sec.alt||'Location').replace(/'/g,"\\'");
+                    html += '<a href="javascript:void(0)" onclick="renderLocation(\''+sec.page+'\',\''+safe+'\')">'+img+'</a>';
+                } else { html += img; }
+            });
+            return html + '</div>';
+        }
+        function screenFrame(src){ return '<iframe class="fl-screenframe" src="'+src+'"></iframe>'; }
+
+        var CENTER_TITLES = {map:'The Region', overview:'Campaign Overview', adventure:'Adventure', stash:'Stash', dice:'Dice Roller'};
+        function setCenter(view){
+            var n = campNum(), body;
+            if(view==='map')            body = mapHTML();
+            else if(view==='overview')  body = screenFrame('overview.html?c='+n);
+            else if(view==='adventure') body = screenFrame('adventure.html?c='+n);
+            else if(view==='stash')     body = screenFrame('stash.html?c='+n);
+            else if(view==='dice')      body = screenFrame('dice-roller.html');
+            document.getElementById('fl-centerView').innerHTML = body;
+            document.getElementById('fl-centerTitle').textContent = CENTER_TITLES[view];
+            document.getElementById('fl-legend').style.visibility = (view==='map') ? 'visible' : 'hidden';
+            ['map','overview','adventure','stash','dice'].forEach(function(v){
+                document.getElementById('fl-a-'+v).classList.toggle('active', v===view);
             });
         }
-        
-        function showWarband() {
-            const campaignNum = currentCampaign.split('-')[1];
-            window.open(`warband.html?c=${campaignNum}`, '_blank');
+
+        // ---- last-turn band (from posts.js blogPosts) ----
+        function renderLastTurn(){
+            var band = document.getElementById('fl-logband');
+            var turns = (typeof blogPosts !== 'undefined' ? blogPosts : []).filter(function(p){ return p.category === currentCampaign; });
+            if(!turns.length){
+                band.innerHTML = '<span class="who">Last Turn:</span> No turns recorded yet. '
+                    + '<a class="turnlink" href="/five-leagues/turns/">Turns &rarr;</a>';
+                return;
+            }
+            var t = turns[0];
+            band.innerHTML = '<span class="who">Last Turn &mdash; '+t.title+':</span> '
+                + (t.excerpt || '') + ' <a class="turnlink" href="'+t.url+'">Read full turn &rarr;</a>';
         }
-        
-        function showOverview() {
-            // Load overview page in main content area
-            const campaignNum = currentCampaign.split('-')[1];
-            document.getElementById('campaign-content').innerHTML = 
-                `<iframe src="overview.html?c=${campaignNum}" style="width: 100%; height: 1200px; border: none;"></iframe>`;
+
+        // ---- roster ----
+        function renderRoster(){
+            var html = '';
+            if(typeof warband === 'undefined' || !warband.length){
+                document.getElementById('fl-roster').innerHTML = '<p class="text-grey">No warband members yet.</p>';
+                return;
+            }
+            warband.forEach(function(c,i){
+                html += '<div class="fl-pc '+typeClass(c.type)+'" onclick="renderCharacter('+i+')">'
+                     + '<div><span class="nm">'+c.name+'</span><span class="ty">'+c.type+'</span></div>'
+                     + '<span class="hp">'+c.stats.tough+'</span></div>';
+            });
+            document.getElementById('fl-roster').innerHTML = html;
         }
-        
-        function showAdventure() {
-            const campaignNum = currentCampaign.split('-')[1];
-            document.querySelector('iframe[name="sidebar-general"]').src = `adventure.html?c=${campaignNum}`;
+
+        // ---- data loading + render ----
+        function injectScript(src, id, cb){
+            var old = document.getElementById(id);
+            if(old) old.remove();
+            var s = document.createElement('script');
+            s.id = id; s.src = src;
+            s.onload = cb;
+            s.onerror = function(){ console.error('Failed to load '+src); cb(); };
+            document.head.appendChild(s);
         }
-        
-        function showMap() {
-            const campaignNum = currentCampaign.split('-')[1];
-            document.getElementById('campaign-content').innerHTML = 
-                `<iframe src="map.html?c=${campaignNum}" style="width: 100%; height: 1200px; border: none;"></iframe>`;
+
+        function renderAll(){
+            document.getElementById('fl-campTitle').textContent = (typeof campaignName !== 'undefined') ? campaignName : 'Campaign';
+            var region = (typeof regionName !== 'undefined') ? regionName : '';
+            document.getElementById('fl-regionLine').textContent = region ? ('Region: ' + region) : '';
+            var res = (typeof warbandResources !== 'undefined') ? warbandResources : {storyPoints:0,adventurePoints:0,goldMarks:0};
+            document.getElementById('fl-rStory').textContent = res.storyPoints || 0;
+            document.getElementById('fl-rAdv').textContent   = res.adventurePoints || 0;
+            document.getElementById('fl-rGold').textContent  = res.goldMarks || 0;
+            renderRoster();
+            renderLastTurn();
+            setCenter('map');
+            if(typeof warband !== 'undefined' && warband.length) renderCharacter(0);
+            else document.getElementById('fl-insBody').innerHTML = '<p class="text-grey">No warband members yet.</p>';
         }
-        
-        function loadCampaign(campaignId) {
+
+        function loadCampaign(campaignId){
             currentCampaign = campaignId;
-            const campaignNum = campaignId.split('-')[1];
-            
-            // Highlight active campaign button
-            document.querySelectorAll('.campaign-btn').forEach(btn => {
-                const isActive = btn.getAttribute('data-campaign') === campaignId;
-                btn.style.border = isActive ? '3px solid #00ff00' : '';
-                btn.style.fontWeight = isActive ? 'bold' : 'normal';
+            var n = campaignId.split('-')[1];
+            document.querySelectorAll('.campaign-btn').forEach(function(btn){
+                btn.classList.toggle('active', btn.getAttribute('data-campaign') === campaignId);
             });
-            
-            loadCampaignData(campaignNum).then(campaign => {
-                document.getElementById('warband-sidebar-link').href = `warband.html?c=${campaignNum}`;
-                document.getElementById('stash-sidebar-link').href = `stash.html?c=${campaignNum}`;
-                document.querySelector('iframe[name="sidebar-general"]').src = `warband.html?c=${campaignNum}`;
-                showOverview();
+            // warband data, then map data, then render
+            injectScript('c'+n+'/warband-data.js', 'fl-warband-data', function(){
+                injectScript('c'+n+'/map-data.js', 'fl-map-data', renderAll);
             });
         }
-        
-        // Load default campaign
+
         loadCampaign(currentCampaign);
     </script>
     <script src="/assets/js/giscus-loader.js"></script>
