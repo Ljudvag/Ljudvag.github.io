@@ -1,0 +1,18 @@
+---
+layout: fiveleagues
+---
+{% comment %}
+  A single Five Leagues campaign turn. Wrapped by the fiveleagues layout,
+  so it carries the Five Leagues chrome and menu. Shows which campaign and
+  turn it is, then the Markdown body.
+{% endcomment %}
+<div class="content-box">
+    <p style="color: #999; font-size: 0.9em;">
+        Campaign {{ page.campaign }} &middot; Turn {{ page.turn }} &middot; {{ page.date | date: "%B %-d, %Y" }}
+    </p>
+
+    {{ content }}
+
+    <hr>
+    <p><a href="/five-leagues/turns/" style="color: #0099ff;">&larr; All turns</a></p>
+</div>

@@ -111,6 +111,23 @@ Step by step:
    `/blog/my-new-title/` and is automatically listed in **Recent Posts**
    on the home page. There is no list to update by hand.
 
+## The Five Leagues subsite
+
+Five Leagues lives under `/five-leagues/` and is meant to feel like its own
+little site: it has its own menu (`_includes/fiveleagues-menu.html`) and its
+own layouts, separate from the main site.
+
+- **The interactive app** (`five-leagues/index.html`, `map.html`, `warband.html`,
+  `overview.html`, the `cN/` data, etc.) is hand-written HTML + JavaScript. It
+  has no front matter, so Jekyll passes it through untouched.
+- **Campaign turns** are posts in `_posts/` with `category: 5leagues` and the
+  `turn` layout. They show at `/five-leagues/turns/` (the Five Leagues "blog"),
+  grouped by `campaign` and ordered by `turn` — so multiple campaigns never mix.
+- **`blog/posts.js` is generated** by Jekyll from those turns. The interactive
+  app reads it exactly as before, but you never edit it by hand now — add a turn
+  file in `_posts/` and the app picks it up. (It is emitted in the app's old
+  `5Leagues-N` format on purpose, so the app code didn't have to change.)
+
 ## Roadmap (rework in progress)
 
 This site is mid-migration from the old hand-built version. Done / planned:
@@ -120,9 +137,11 @@ This site is mid-migration from the old hand-built version. Done / planned:
 - [x] **Batch 2 — pages:** converted `music`, `miniatures`, `dk3k`,
       `oskars-pixel-art`, `external-links` to the layout; added a `/blog/`
       index; replaced the per-page post-listing JavaScript with Liquid.
-- [ ] **Batch 3 — Five Leagues subsite:** move the campaign app to
-      `/five-leagues/` with its own layout + menu; move campaign turns
-      into the `_turns/` collection; feed the interactive page via a
-      generated `turns.json`.
-- [ ] **Batch 4 — cleanup:** delete `menu.js`, `posts.js`, the duplicated
-      render code, and dead CSS.
+- [x] **Batch 3 — Five Leagues subsite:** moved the campaign app to
+      `/five-leagues/` with its own `fiveleagues` layout + menu and a `turn`
+      layout; migrated the campaign turns into `_posts/` (category
+      `5leagues`); added `/five-leagues/turns/` (the Five Leagues "blog");
+      `blog/posts.js` is now generated from `_posts/` so the interactive app
+      feeds itself.
+- [ ] **Batch 4 — cleanup:** delete `menu.js`, the old `blog/*.html` turn
+      files, the duplicated render code, and dead CSS.
