@@ -52,7 +52,10 @@
       return;
     }
 
-    var target = document.querySelector('.content-box') || document.body;
+    // Prefer an explicit mount point (added at the bottom of the page layouts)
+    // so the guestbook always lands at the end -- not inside the first
+    // .content-box, which breaks on pages that have several of them.
+    var target = document.getElementById('guestbook-host') || document.querySelector('.content-box') || document.body;
     target.appendChild(createGuestbookSection());
   }
 
