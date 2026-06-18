@@ -57,6 +57,31 @@ marquee: Best viewed in a browser
 A file with no front matter is copied through untouched (which is how the
 not-yet-converted pages and all the campaign app's JavaScript keep working).
 
+## Categories (tags)
+
+Every post has a `category` — a simple tag used to decide where it shows up:
+
+| `category` | Shows on |
+|------------|----------|
+| `general` | home + `/blog/` |
+| `music` | home + `/blog/` + the Music page's "Recent Music Posts" |
+| `minis` | home + `/blog/` + the Miniatures page's posts |
+| `5leagues` | **only** the Five Leagues section (see below) |
+
+A page that wants a subset just filters by category in Liquid, e.g. the
+Music page does `site.posts | where: "category", "music"`. The home page
+and `/blog/` show everything **except** `5leagues` turns.
+
+**Five Leagues campaign turns** are the one special case (built in Batch 3).
+They use `category: 5leagues` plus two extra fields that keep campaigns from
+ever being mixed up:
+
+- `campaign:` — which campaign (matches the `cN/` folder and `?c=N`)
+- `turn:` — the turn number *within* that campaign
+
+The Five Leagues overview filters to one `campaign` and orders by `turn`, so
+several campaigns can run at once without their turns interleaving.
+
 ## How to add a blog post
 
 1. Create a file in `_posts/` named `YYYY-MM-DD-some-title.md`
@@ -86,9 +111,9 @@ This site is mid-migration from the old hand-built version. Done / planned:
 
 - [x] **Batch 1 — foundation:** Jekyll config, `default`/`post` layouts,
       menu include, home page, first post migrated, this document.
-- [ ] **Batch 2 — pages:** convert `music`, `miniatures`, `dk3k`,
-      `oskars-pixel-art`, `external-links` to the layout; build a proper
-      `/blog/` index; remove the old per-page post-listing JavaScript.
+- [x] **Batch 2 — pages:** converted `music`, `miniatures`, `dk3k`,
+      `oskars-pixel-art`, `external-links` to the layout; added a `/blog/`
+      index; replaced the per-page post-listing JavaScript with Liquid.
 - [ ] **Batch 3 — Five Leagues subsite:** move the campaign app to
       `/five-leagues/` with its own layout + menu; move campaign turns
       into the `_turns/` collection; feed the interactive page via a

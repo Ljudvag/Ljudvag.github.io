@@ -25,7 +25,7 @@ marquee: Best viewed in a browser
       from the files in _posts/. There is no posts.js and no JavaScript:
       add a post file, and it shows up here automatically.
     {% endcomment %}
-    {% assign recent = site.posts | sort: "date" | reverse %}
+    {% assign recent = site.posts | where_exp: "post", "post.category != '5leagues'" | sort: "date" | reverse %}
     {% if recent.size == 0 %}
     <p>No posts yet.</p>
     {% else %}
