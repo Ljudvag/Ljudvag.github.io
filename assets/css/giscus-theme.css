@@ -1,3 +1,15 @@
+/* The site's pixel fonts are declared with @font-face in style.css, which the
+   giscus iframe can't see -- so 'Press Start 2P' was collapsing to the cursive
+   fallback (Comic Sans). Re-declare VT323 here (CORS is open on GitHub Pages)
+   so the iframe renders the proper terminal font. */
+@font-face {
+  font-family: 'VT323';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://ljudvag.github.io/assets/fonts/vt323.ttf') format('truetype');
+  font-display: swap;
+}
+
 main {
   --color-prettylights-syntax-comment: #999999;
   --color-prettylights-syntax-constant: #2fa5f4;
@@ -99,7 +111,7 @@ main h3,
 main h4,
 main h5,
 main h6 {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'VT323', monospace;
 }
 
 .gsc-reactions-count {
