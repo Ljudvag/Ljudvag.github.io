@@ -1,15 +1,19 @@
-<!-- ==========================================================
-     Site navigation menu.
+{% comment %}
+  Site navigation menu.
 
-     This is an "include": the default layout pulls it in with
-       {% include menu.html %}
-     so every page shows the same menu. Edit the links HERE once,
-     and every page updates. (This replaces the old menu.js, which
-     built the menu with JavaScript in the browser.)
+  This file is an "include": the default layout pulls it in (with an
+  include tag) so every page shows the same menu. Edit the links HERE
+  once, and every page updates. This replaces the old menu.js, which
+  built the menu with JavaScript in the browser.
 
-     Links are absolute (start with "/") so they work the same from
-     any page, no matter how deeply nested.
-     ========================================================== -->
+  Links are absolute (they start with "/") so they work the same from
+  any page, no matter how deeply nested.
+
+  This explanation is wrapped in a Liquid comment block, not an HTML
+  comment. That matters: Liquid still runs its tags inside ordinary
+  <!-- --> comments, so a tag written as an example there would actually
+  execute. Keep Liquid examples out of HTML comments.
+{% endcomment %}
 <nav class="menu-bar">
   <ul>
     <li><a href="/">Home</a></li>
