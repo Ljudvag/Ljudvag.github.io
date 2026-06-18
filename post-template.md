@@ -5,8 +5,9 @@ date: 2026-01-01
 heading: Post Title Here
 marquee: Posted on January 1, 2026
 category: general
-# Five Leagues campaign turns ONLY: change "layout: post" to "layout: turn",
-# set "category: 5leagues", and add these lines:
+# Five Leagues campaign turns ONLY: put the file in five-leagues/_posts/
+# (not _posts/), change "layout: post" to "layout: turn", set
+# "category: 5leagues", and add these lines:
 # campaign: 1
 # turn: 1
 # excerpt: One-line summary shown in the turn lists
@@ -32,11 +33,12 @@ category: general
      general    Plain blog post. Shows on the home page and /blog/.
      music      Music post. Also shows on the Music page.
      minis      Miniatures post. Also shows on the Miniatures page.
-     5leagues   A Five Leagues campaign turn. Does NOT show on the home
-                page or /blog/ -- it lives in the Five Leagues section
-                (/five-leagues/turns/). Campaign turns also use the "turn"
-                layout and set three extra fields:
+     5leagues   A Five Leagues campaign turn. Lives entirely inside the
+                subsite: put the file in five-leagues/_posts/ (not _posts/).
+                It gets a /five-leagues/turns/... URL automatically and never
+                shows on the home page or /blog/. Set these fields:
                   layout:    turn   (instead of post -- gives Five Leagues chrome)
+                  category:  5leagues
                   campaign:  which campaign (e.g. 1 = Wilhelms Hounds)
                   turn:      the turn number within that campaign
                   excerpt:   one-line summary shown in the turn lists

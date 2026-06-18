@@ -23,7 +23,7 @@
         <div id="campaign-posts">Loading...</div>
     </div>
     
-    <script src="../blog/posts.js"></script>
+    <script src="posts.js"></script>
     <script>
         // Get campaign parameter from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -64,7 +64,7 @@
             } else {
                 container.innerHTML = '<ul style="list-style: none; padding: 0;">' + 
                     posts.map(p => `<li style="margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #666;">
-                        <h3><a href="../blog/${p.url}" class="text-blue" target="_blank">${p.title}</a></h3>
+                        <h3><a href="${p.url}" class="text-blue" target="_blank">${p.title}</a></h3>
                         <p class="text-grey" style="font-size: 0.9em;">${p.date}</p>
                         <p>${p.excerpt}</p></li>`).join('') + '</ul>';
             }

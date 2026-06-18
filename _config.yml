@@ -22,19 +22,18 @@ markdown: kramdown
 # Change the pattern here and every post URL follows.
 permalink: /blog/:title/
 
-# --- Collections ---------------------------------------------
-# A "collection" is just a folder of related dated files that
-# Jekyll groups together for you. We keep two separate streams:
-#
-#   _posts/   the main blog ("random projects")  -> site.posts  (built in)
-#   _turns/   Five Leagues campaign turns         -> site.turns
-#
-# Keeping them separate is what makes Five Leagues feel like its
-# own subsite: campaign turns never mix into the main blog list.
-collections:
-  turns:
-    output: true                          # publish a page per turn
-    permalink: /five-leagues/turns/:name/ # URL for each turn page
+# --- Five Leagues campaign turns -----------------------------
+# Campaign turns live in five-leagues/_posts/ -- a posts folder INSIDE the
+# subsite, so Five Leagues keeps its own content together. Jekyll still
+# collects them into site.posts (we tell them apart by "category: 5leagues"),
+# but this rule gives any post in that folder a /five-leagues/turns/... URL,
+# so no Five Leagues content lives under /blog/.
+defaults:
+  - scope:
+      path: "five-leagues/_posts"
+      type: posts
+    values:
+      permalink: /five-leagues/turns/:title/
 
 # --- Things Jekyll should ignore -----------------------------
 # archive/ is a frozen copy of the old pre-Jekyll site, kept only
