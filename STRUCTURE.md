@@ -84,6 +84,12 @@ several campaigns can run at once without their turns interleaving.
 
 ## How to add a blog post
 
+The quickest way: copy `post-template.md` (in the repo root) into `_posts/`,
+rename it with a date, and edit it. The template lists every category in a
+comment so you don't have to remember them.
+
+Step by step:
+
 1. Create a file in `_posts/` named `YYYY-MM-DD-some-title.md`
    (the date in the filename is required).
 2. Give it front matter and write the body in Markdown:

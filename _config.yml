@@ -43,3 +43,4 @@ exclude:
   - archive/
   - README.md
   - STRUCTURE.md
+  - post-template.md
