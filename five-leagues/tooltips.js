@@ -79,7 +79,48 @@ const tooltips = {
     // Add more as needed
 };
 
-// Function to create tooltip span
 function tt(key) {
-    return `<span title="${tooltips[key]}" style="border-bottom: 1px dotted #0099ff; cursor: help; color: #0099ff;">${key}</span>`;
+    return `<span class="tt" data-tip="${tooltips[key]}" style="border-bottom: 1px dotted #0099ff; cursor: help; color: #0099ff;">${key}</span>`;
 }
+
+(function () {
+    var popup = null;
+    var current = null;
+
+    function show(el) {
+        if (!popup) {
+            popup = document.createElement('div');
+            popup.id = 'tt-popup';
+            popup.style.cssText =
+                'position:absolute; z-index:9999; max-width:80vw;' +
+                'background:#000; color:#fff; border:1px solid #0099ff;' +
+                'padding:8px; font-size:0.95em; line-height:1.3;' +
+                'white-space:pre-line; box-shadow:3px 3px 0 #333;';
+            (document.body || document.documentElement).appendChild(popup);
+        }
+        popup.textContent = el.getAttribute('data-tip') || '';
+        popup.style.display = 'block';
+        var rect = el.getBoundingClientRect();
+        var left = rect.left + window.scrollX;
+        var maxLeft = window.scrollX + document.documentElement.clientWidth - popup.offsetWidth - 8;
+        if (left > maxLeft) { left = Math.max(8, maxLeft); }
+        popup.style.left = left + 'px';
+        popup.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+        current = el;
+    }
+
+    function hide() {
+        if (popup) { popup.style.display = 'none'; }
+        current = null;
+    }
+
+    document.addEventListener('click', function (e) {
+        var el = e.target.closest ? e.target.closest('.tt') : null;
+        if (el) {
+            e.preventDefault();
+            if (current === el) { hide(); } else { show(el); }
+        } else {
+            hide();
+        }
+    });
+})();
