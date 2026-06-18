@@ -170,3 +170,27 @@ blink {
 .border-green {
     border: 2px solid #00cc00;
 }
+
+/* Stack the menu on narrow screens so all links stay reachable */
+@media (max-width: 600px) {
+    body {
+        margin: 10px;
+    }
+
+    h1 {
+        font-size: 1.2em;
+    }
+
+    .menu-bar ul {
+        flex-direction: column;
+    }
+
+    .menu-bar a {
+        border-right: none;
+        border-bottom: 2px solid white;
+    }
+
+    .menu-bar li:last-child > a {
+        border-bottom: none;
+    }
+}
