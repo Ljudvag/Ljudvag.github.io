@@ -143,5 +143,6 @@ This site is mid-migration from the old hand-built version. Done / planned:
       `5leagues`); added `/five-leagues/turns/` (the Five Leagues "blog");
       `blog/posts.js` is now generated from `_posts/` so the interactive app
       feeds itself.
-- [ ] **Batch 4 — cleanup:** delete `menu.js`, the old `blog/*.html` turn
-      files, the duplicated render code, and dead CSS.
+- [x] **Batch 4 — cleanup:** deleted `menu.js` (the hub now has a static
+      Five Leagues menu), the old superseded `blog/*.html` files, and dead
+      CSS (`.text-pink-old`). Rework complete.
