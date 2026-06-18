@@ -11,9 +11,9 @@ excerpt: We have arrived in Alter Erob.
 
 <p><i>Day 1 in Alter Erob,
 <br><br>
-These dry lands give no illusion of welcome. The horrors that beseige them have left infected and vile looking scars all across the region. My companions are a grim and weary lot, and I do not know whom of them I am to trust, but the promise of wealth should be enough to motivate them for now.
+These dry lands give no illusion of welcome. The horrors that besiege them have left infected and vile-looking scars all across the region. My companions are a grim and weary lot, and I do not know who among of them I am to trust, but the promise of wealth should be enough to motivate them for now.
 <br><br>
-We came across a rambling old husk of a man whom told us of a haunting presence lurking in the forests to the west.
+We came across a rambling old husk of a man who told us of a haunting presence lurking in the forests to the west.
 <br><br>- Wilhelm von Basque</i></p>
 
 <p><i>Day 3 in Alter Erob,
