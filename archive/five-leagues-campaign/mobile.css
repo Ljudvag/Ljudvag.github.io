@@ -1,0 +1,134 @@
+/* Mobile responsive styles for Five Leagues Campaign */
+
+@media (max-width: 768px) {
+    /* Stack layout vertically on mobile */
+    body > div {
+        flex-direction: column !important;
+    }
+    
+    /* Main content area - full width */
+    body > div > div:first-child {
+        width: 100% !important;
+    }
+    
+    /* Sidebar container - full width and stack below */
+    body > div > div:last-child {
+        width: 100% !important;
+        margin-top: 20px;
+    }
+    
+    /* Main navigation menu - reduce font size and allow wrapping */
+    #menu-container {
+        font-size: 0.75em !important;
+    }
+    
+    #menu-container a {
+        margin: 3px 5px !important;
+        display: inline-block;
+    }
+    
+    /* Campaign selector buttons - smaller on mobile */
+    .border-blue button,
+    .bg-pink,
+    .bg-grey {
+        font-size: 0.75em;
+        padding: 3px 6px !important;
+        margin: 3px 2px !important;
+        color: #000000 !important;
+    }
+    
+    /* Menu links - wrap and reduce spacing */
+    .border-green {
+        font-size: 0.8em;
+        line-height: 1.8;
+    }
+    
+    .border-green a {
+        display: inline-block;
+        margin: 3px 5px !important;
+        white-space: nowrap;
+    }
+    
+    /* Campaign selector text */
+    .border-blue span {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    /* Reduce iframe heights for mobile */
+    iframe[style*="600px"] {
+        height: 400px !important;
+    }
+    
+    iframe[style*="800px"] {
+        height: 500px !important;
+    }
+    
+    iframe[name="sidebar-dice-roller"] {
+        height: 200px !important;
+    }
+    
+    iframe[name="sidebar-general"] {
+        height: 600px !important;
+    }
+    
+    /* Content box padding */
+    .content-box {
+        padding: 10px !important;
+    }
+    
+    /* Headings - slightly smaller */
+    h2 {
+        font-size: 1.3em;
+    }
+    
+    h3 {
+        font-size: 1.1em;
+    }
+    
+    /* Tables and grids - allow horizontal scroll if needed */
+    .content-box > div {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small screens - even more compact */
+    
+    /* Main navigation menu - even smaller */
+    #menu-container {
+        font-size: 0.65em !important;
+    }
+    
+    #menu-container a {
+        margin: 2px 3px !important;
+    }
+    
+    .border-blue button,
+    .bg-pink,
+    .bg-grey {
+        font-size: 0.7em;
+        padding: 2px 4px !important;
+        margin: 2px 1px !important;
+        color: #000000 !important;
+    }
+    
+    .border-green {
+        font-size: 0.7em;
+        padding: 5px !important;
+    }
+    
+    .border-green a {
+        margin: 2px 3px !important;
+        font-size: 0.9em;
+    }
+    
+    /* Abbreviate menu text on very small screens */
+    .border-green a:nth-child(1) {
+        /* Warband (new tab) */
+    }
+    
+    .border-green a:nth-child(2) {
+        /* Warband (sidebar) */
+    }
+}

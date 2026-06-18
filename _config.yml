@@ -1,1 +1,45 @@
+# ============================================================
+#  Jekyll configuration for ljudvag.github.io
+#
+#  Jekyll is a "static site generator": when you push to the
+#  main branch, GitHub runs Jekyll on this repo and serves the
+#  plain HTML it produces. You never run anything yourself.
+#
+#  This file is the one place global settings live.
+# ============================================================
 
+title: Ljudvag
+description: A World Wide Web web site
+
+# --- Markdown engine -----------------------------------------
+# How .md files (blog posts, campaign turns) get turned into HTML.
+# kramdown is the GitHub Pages default; no reason to change it.
+markdown: kramdown
+
+# --- URLs for blog posts -------------------------------------
+# A file _posts/2026-01-03-first-post.md will be published at
+#   /blog/first-post/
+# Change the pattern here and every post URL follows.
+permalink: /blog/:title/
+
+# --- Collections ---------------------------------------------
+# A "collection" is just a folder of related dated files that
+# Jekyll groups together for you. We keep two separate streams:
+#
+#   _posts/   the main blog ("random projects")  -> site.posts  (built in)
+#   _turns/   Five Leagues campaign turns         -> site.turns
+#
+# Keeping them separate is what makes Five Leagues feel like its
+# own subsite: campaign turns never mix into the main blog list.
+collections:
+  turns:
+    output: true                          # publish a page per turn
+    permalink: /five-leagues/turns/:name/ # URL for each turn page
+
+# --- Things Jekyll should ignore -----------------------------
+# archive/ is a frozen copy of the old pre-Jekyll site, kept only
+# for reference. We don't want it rebuilt or served as the live site.
+exclude:
+  - archive/
+  - README.md
+  - STRUCTURE.md

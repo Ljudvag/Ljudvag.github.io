@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="tooltips.js"></script>
+    <script src="shared-utils.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-pink" style="margin-top: 0;" id="campaign-title">Campaign Stash</h3>
+        
+        <div id="stash-container"></div>
+    </div>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('c') || '0';
+        
+        loadCampaignScript(campaignId, function() {
+            document.getElementById('campaign-title').textContent = `${campaignName} Stash`;
+            
+            // Render the stash
+            let html = '';
+            
+            // Gold Marks section
+            html += `<div style="margin-bottom: 15px;">
+                <h4 class="text-yellow" style="margin: 0 0 5px 0;">Gold Marks: ${warbandResources.goldMarks}</h4>
+            </div>`;
+            
+            // Equipment Stash section
+            html += `<div class="border-blue" style="padding: 15px; margin-bottom: 20px; background-color: #1a1a1a;">
+                <h4 class="text-blue" style="margin-top: 0;">Equipment Stash</h4>`;
+            
+            if (stash.equipmentStash.length > 0) {
+                html += `<ul style="list-style: none; padding: 0; margin: 0;">`;
+                stash.equipmentStash.forEach(item => {
+                    html += `<li style="padding: 5px 0; border-bottom: 1px solid #333;">${renderItem(item)}</li>`;
+                });
+                html += `</ul>`;
+            } else {
+                html += `<p class="text-grey">No items in equipment stash.</p>`;
+            }
+            
+            html += `</div>`;
+            
+            // Backpack section
+            html += `<div class="border-green" style="padding: 15px; margin-bottom: 20px; background-color: #1a1a1a;">
+                <h4 class="text-green" style="margin-top: 0;">Backpack</h4>`;
+            
+            if (stash.backpack.length > 0) {
+                html += `<ul style="list-style: none; padding: 0; margin: 0;">`;
+                stash.backpack.forEach(item => {
+                    html += `<li style="padding: 5px 0; border-bottom: 1px solid #333;">${renderItem(item)}</li>`;
+                });
+                html += `</ul>`;
+            } else {
+                html += `<p style="color: #666;">No items in backpack.</p>`;
+            }
+            
+            html += `</div>`;
+            
+            // Add link to open in new tab
+            const currentUrl = window.location.href;
+            html += `<div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #333;">
+                <a href="${currentUrl}" target="_blank" class="text-blue" style="text-decoration: none; font-weight: bold;">Open in New Tab</a>
+            </div>`;
+            
+            document.getElementById('stash-container').innerHTML = html;
+        });
+    </script>
+    <script src="/assets/js/giscus-loader.js"></script>
+</body>
+</html>

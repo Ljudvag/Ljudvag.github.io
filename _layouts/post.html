@@ -1,0 +1,21 @@
+---
+layout: default
+---
+{% comment %}
+  Layout for a single blog post.
+
+  "layout: default" above means this layout is itself wrapped by
+  default.html, so a post automatically gets the site chrome
+  (heading, menu, footer). Here we only add the post-specific bits:
+  the date line and a link back to the blog list.
+
+  {{ content }} is the post's Markdown body, turned into HTML.
+{% endcomment %}
+<div class="content-box">
+    <p style="color: #999; font-size: 0.9em;">{{ page.date | date: "%B %-d, %Y" }}</p>
+
+    {{ content }}
+
+    <hr>
+    <p><a href="/blog/" style="color: #0099ff;">&larr; Back to Blog</a></p>
+</div>

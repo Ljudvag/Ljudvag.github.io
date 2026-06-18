@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="tooltips.js"></script>
+    <script src="shared-utils.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+    <div style="padding: 20px; background-color: #000000; color: #ffffff;">
+        <h3 class="text-pink" style="margin-top: 0;" id="campaign-title">Campaign Warband</h3>
+        
+        <div id="warband-container"></div>
+    </div>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const campaignId = urlParams.get('c') || '0';
+        
+        function renderList(items) {
+            return items.map(item => renderItem(item)).join(', ');
+        }
+        
+        // Function to generate character HTML
+        function renderCharacter(char) {
+            const colorMap = {
+                'Avatar': 'text-blue',
+                'Hero': 'text-green',
+                'Follower': 'text-pink',
+                'Dead/Retired:': 'text-grey'
+            };
+            const titleClass = colorMap[char.type] || '';
+            
+            let html = `<h4 class="${titleClass}">${char.name}</h4>`;
+            
+            if (char.notes) {
+                html += `<p class="text-grey" style="font-style: italic; font-size: 0.85em; margin-top: -10px;">${char.notes}</p>`;
+            }
+            if (char.history) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>History:</strong><br>
+                    ${char.history}
+                </p>`;
+            }
+                        
+            html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.9em; margin-bottom: 10px;">
+                <div><strong>Origin:</strong> ${renderItem(char.origin)}</div>
+                <div><strong>Level:</strong> ${char.level}</div>
+                <div><strong>Background:</strong> ${char.background}</div>
+                <div><strong>XP:</strong> ${char.xp}</div>
+            </div>`;
+            
+            html += `<p style="font-size: 0.9em;">
+                <strong>Stats:</strong><br>
+                Agility: ${char.stats.agility} | Speed: ${char.stats.speed} | Combat: ${char.stats.combat} <br> Tough: ${char.stats.tough} | ${tt('Will')}: ${char.stats.will} | ${tt('Luck')}: ${char.stats.luck} | Casting: ${char.stats.casting} 
+            </p>`;
+            
+
+            if (char.proficiencies.length > 0) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>Proficiencies:</strong><br>
+                    ${renderList(char.proficiencies)}
+                </p>`;
+            }
+            
+            if (char.spells.length > 0) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>Spells:</strong><br>
+                    ${renderList(char.spells)}
+                </p>`;
+            }
+            
+            if (char.equipment.length > 0) {
+                html += `<p style="font-size: 0.9em;">
+                    <strong>Equipment:</strong><br>
+                    ${renderList(char.equipment)}
+                </p>`;
+            }
+            
+            return html;
+        }
+        
+        loadCampaignScript(campaignId, function() {
+            document.getElementById('campaign-title').textContent = `${campaignName} Warband`;
+            
+            // Render the warband
+            let html = '';
+            
+            if (!warband || warband.length === 0) {
+                html = '<p class="text-grey">No warband members yet.</p>';
+            } else {
+                warband.forEach((member, index) => {
+                    if (index > 0) html += `<div style="margin-top: 20px;">`;
+                    html += renderCharacter(member);
+                    if (index > 0) html += `</div>`;
+                });
+            }
+            
+            // Add link to open in new tab
+            const currentUrl = window.location.href;
+            html += `<div style="margin-top: 20px; text-align: center; padding-top: 15px; border-top: 1px solid #333;">
+                <a href="${currentUrl}" target="_blank" class="text-blue" style="text-decoration: none; font-weight: bold;">Open in New Tab</a>
+            </div>`;
+            
+            document.getElementById('warband-container').innerHTML = html;
+        });
+    </script>
+    <script src="/assets/js/giscus-loader.js"></script>
+</body>
+</html>

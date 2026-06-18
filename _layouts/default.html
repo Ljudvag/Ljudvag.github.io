@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The browser-tab title. Each page sets "title:" in its front matter. -->
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+
+        <!-- Big page heading. A page can set "heading:" in its front
+             matter; if it doesn't, we fall back to its title. -->
+        <h1>{{ page.heading | default: page.title }}</h1>
+
+        <!-- Optional scrolling marquee. Only appears if the page sets
+             "marquee:" in its front matter. -->
+        {% if page.marquee %}
+        <div class="marquee">
+            <marquee>{{ page.marquee }}</marquee>
+        </div>
+        {% endif %}
+
+        <!-- The shared navigation menu (see _includes/menu.html). -->
+        {% include menu.html %}
+
+        <!-- Everything written in the page itself drops in here. -->
+        {{ content }}
+
+        <div style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #666;">
+            &copy; 2026 Ljudvag
+        </div>
+    </div>
+
+    <!-- Guestbook (comments via GitHub Discussions), shown on every page. -->
+    <script src="/assets/js/giscus-loader.js"></script>
+</body>
+</html>
