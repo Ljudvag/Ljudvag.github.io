@@ -29,7 +29,6 @@
         color:#00cc00; border-bottom:1px solid #333; padding-bottom:6px;
         display:flex; justify-content:space-between; align-items:baseline;
       }
-      .mode-char{color:#00cc00;} .mode-loc{color:#ffd24a;} .mode-dice{color:#2fa5f4;}
 
       /* LEFT inspector */
       #fl-insName{font-size:1.2em; margin:0 0 2px;}
@@ -98,7 +97,6 @@
         <div class="fl-toprow">
             <!-- LEFT: shared inspector (character or location) -->
             <div class="fl-panel">
-                <h3><span id="fl-leftLabel">Inspector</span></h3>
                 <div id="fl-insBody"></div>
             </div>
 
@@ -169,8 +167,6 @@
             if(c.equipment && c.equipment.length)
                 h += '<p class="fl-sub"><span class="lbl">Equipment</span>'+renderList(c.equipment)+'</p>';
             document.getElementById('fl-insBody').innerHTML = h;
-            var lbl = document.getElementById('fl-leftLabel');
-            lbl.textContent = 'Character'; lbl.className = 'mode-char';
             document.querySelectorAll('.fl-pc').forEach(function(el,idx){ el.classList.toggle('active', idx===i); });
         }
 
@@ -179,16 +175,12 @@
             // Shrink the location page's text a touch so longer ones fit the narrow left pane.
             document.getElementById('fl-insBody').innerHTML =
                 '<iframe class="fl-locframe" src="'+page+'" onload="try{this.contentDocument.body.style.fontSize=\'1.05em\'}catch(e){}"></iframe>';
-            var lbl = document.getElementById('fl-leftLabel');
-            lbl.textContent = 'Location'; lbl.className = 'mode-loc';
             document.querySelectorAll('.fl-pc').forEach(function(el){ el.classList.remove('active'); });
         }
 
         // ---- LEFT FRAME: dice roller ----
         function renderDice(){
             document.getElementById('fl-insBody').innerHTML = '<iframe class="fl-locframe" src="dice-roller.html"></iframe>';
-            var lbl = document.getElementById('fl-leftLabel');
-            lbl.textContent = 'Dice'; lbl.className = 'mode-dice';
             document.querySelectorAll('.fl-pc').forEach(function(el){ el.classList.remove('active'); });
         }
 
@@ -224,17 +216,18 @@
             return html + '</ul>';
         }
 
-        var CENTER_TITLES = {map:'The Region', overview:'Campaign Overview', adventure:'Adventure', warband:'Warband', stash:'Stash', turns:'Campaign Turns'};
         function setCenter(view){
-            var n = campNum(), body;
-            if(view==='map')            body = mapHTML();
+            var n = campNum(), body, title = '';  // iframe screens carry their own heading; only inline screens get a hub title
+            if(view==='map'){           body = mapHTML(); title = (typeof regionName !== 'undefined' && regionName) ? 'Map of ' + regionName : 'Map'; }
             else if(view==='overview')  body = screenFrame('overview.html?c='+n);
             else if(view==='adventure') body = screenFrame('adventure.html?c='+n);
             else if(view==='warband')   body = screenFrame('warband.html?c='+n);
             else if(view==='stash')     body = screenFrame('stash.html?c='+n);
-            else if(view==='turns')     body = turnsHTML();
+            else if(view==='turns'){     body = turnsHTML(); title = 'Campaign Turns'; }
             document.getElementById('fl-centerView').innerHTML = body;
-            document.getElementById('fl-centerTitle').textContent = CENTER_TITLES[view];
+            var t = document.getElementById('fl-centerTitle');
+            t.textContent = title;
+            t.style.display = title ? '' : 'none';
             ['map','overview','adventure','warband','stash','turns'].forEach(function(v){
                 document.getElementById('fl-a-'+v).classList.toggle('active', v===view);
             });
