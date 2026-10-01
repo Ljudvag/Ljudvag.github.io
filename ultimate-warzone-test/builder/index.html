@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Army Builder</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Barlow:wght@400;600&display=swap">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="builder.css">
+</head>
+<body><main>
+<p class="noprint"><a href="../index.html">&larr; All armies</a></p>
+<h1 class="noprint">Army Builder</h1>
+
+<div class="row buttons noprint">
+  <button id="share" type="button">Copy share link</button>
+  <button id="print" type="button">Print</button>
+  <button id="clear" type="button">Clear list</button>
+  <span id="msg" class="muted small"></span>
+</div>
+
+<section id="setup" class="noprint panel">
+  <div class="row">
+    <label>Army <select id="army"></select></label>
+    <label>Force <select id="force"></select></label>
+    <label>Points limit <input id="limit" type="number" min="0" step="25" placeholder="none"></label>
+    <label class="grow">List name <input id="name" type="text" placeholder="My army"></label>
+  </div>
+  <p id="force-info" class="muted small"></p>
+  <div class="row">
+    <label class="grow">Add a unit <select id="add-entry"></select></label>
+    <button id="add" type="button">Add</button>
+  </div>
+</section>
+
+<section id="editor" class="noprint"></section>
+
+<section id="output">
+  <h1 id="out-title"></h1>
+  <p id="out-sub" class="intro"></p>
+  <div id="out-summary"></div>
+  <div id="out-cards"></div>
+  <div id="out-rules"></div>
+</section>
+
+<section id="warnings"></section>
+</main>
+<script src="data/forces.js"></script>
+<script src="builder.js"></script>
+</body></html>
