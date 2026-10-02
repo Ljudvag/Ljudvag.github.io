@@ -153,8 +153,8 @@
   function designation(u, force) {
     var e = entryOf(u);
     if (!e) return "?";
+    if (u.advisor) return "support";            // advisors, individuals included, are a support unit role (book p.37)
     if (e.kind === "individual") return "individual";
-    if (u.advisor) return "support";            // advisors are a support unit role (book p.37)
     var l = force && force.lists[e.list];
     return (l && l.as) || e.designation;
   }
