@@ -1,4 +1,4 @@
-/* Ultimate Warzone army builder.
+/* Warzone 3+1 army builder (copied from the Ultimate Warzone builder).
  *
  * The data (data/<army>.js, written by tools/export.py) holds every card and rules entry already rendered; this
  * script only keeps the list, adds up the points, shows the chosen models and options, and collects the rules
@@ -10,7 +10,7 @@
   // Load-outs are bought per model (a count of models). Book p.141 says a load-out bought for a squad goes on
   // every viable model of that squad; set this to false for that reading.
   var LOADOUT_PER_MODEL = true;
-  var STORE = "uwz-builder-list";
+  var STORE = "wz31-builder-list";        // its own saved list, apart from the Ultimate Warzone builder
 
   var UWZ = window.UWZ;
   if (!UWZ || !UWZ.forces) {          // the source copy (site/builder/) has no data: tools/export.py writes it
