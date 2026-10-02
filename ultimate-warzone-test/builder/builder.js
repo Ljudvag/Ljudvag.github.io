@@ -113,6 +113,11 @@
     var d = UWZ.armies[army];
     return ((d.powers[group]) || []).filter(function (x) { return x.id === id; })[0];
   }
+  // the enhancements a model carries: the squad's choice (Cybertronic squads) or its own
+  function enhOf(u, e, m) {
+    if (e && e.enh_per_squad) return m.enhancements ? (u.enh["*"] || []) : [];
+    return u.enh[m.slug] || [];
+  }
   function enhItem(army, id) {
     return UWZ.armies[army].enhancements.filter(function (x) { return x.id === id; })[0];
   }
@@ -143,7 +148,7 @@
           if (it) { add(it.name + " (" + m.name + (n > 1 ? ", " + n + " × " + it.cost : "") + ")", n * it.cost); break; }
         }
       });
-      (u.enh[m.slug] || []).forEach(function (id) {
+      enhOf(u, e, m).forEach(function (id) {
         var it = enhItem(u.army, id);
         if (it) add(it.name + " (" + m.name + (n > 1 ? ", " + n + " × " + it.cost : "") + ")", n * it.cost);
       });
@@ -236,7 +241,7 @@
         if (m.role === "specialist" && (per === "squad" || per === e.name)) specialists += n;
         var pw = u.powers[m.slug] || [], mx = (m.powers || []).reduce(function (s, p) { return s + p.max; }, 0);
         if (n && pw.length > mx) w.push(e.name + ": " + m.name + " has " + pw.length + " powers, at most " + mx + ".");
-        var en = u.enh[m.slug] || [];
+        var en = e.enh_per_squad ? [] : enhOf(u, e, m);     // a squad's shared choice is checked once, below
         if (n && en.length > (m.enhancements || 0)) w.push(e.name + ": " + m.name + " has " + en.length + " enhancements, at most " + (m.enhancements || 0) + ".");
       });
       // specialist ratio (FAQ "Page 36: Specialist Buying Criteria"): one per four required models in grunt squads,
@@ -248,12 +253,25 @@
           w.push(e.name + ": " + specialists + " specialists, but " + required + " required models allow " + allowed
             + " (one per " + per + " in " + d + " squads; FAQ \"Page 36\").");
       }
+      if (e.enh_per_squad) {
+        var smax = e.models.reduce(function (s, m) { return Math.max(s, m.enhancements || 0); }, 0);
+        var sn = (u.enh["*"] || []).length;
+        if (sn > smax) w.push(e.name + ": " + sn + " enhancements for the squad, at most " + smax + ".");
+      }
       if (unitSize(u) === 0) w.push(e.name + ": no models chosen.");
     });
     var total = state.units.reduce(function (s, u) { return s + unitPoints(u).total; }, 0);
     if (state.limit && total > state.limit) w.push("Points: " + total + ", over the limit of " + state.limit + ".");
-    if (force && force.advisor_note && state.units.some(function (u) { return u.advisor && u.army === "brotherhood"; }))
-      notes.push("Advisors: " + force.advisor_note + " (" + force.advisors + ").");
+    if (force && force.advisor_no_named) {
+      // Saglielli: "May take Brotherhood Dedicated (no named personalities)" - a named personality is a Brotherhood
+      // individual limited to one per army
+      state.units.forEach(function (u) {
+        var e = entryOf(u);
+        if (u.advisor && u.army === "brotherhood" && e && e.kind === "individual"
+            && e.models.some(function (m) { return m.per === "army"; }))
+          w.push(e.name + ": a named personality, but this force's advisors may not be (“" + force.advisors + "”).");
+      });
+    }
     return { warnings: w, notes: notes, total: total };
   }
 
@@ -352,6 +370,23 @@
         opts.appendChild(el("div", { class: "line" }, kids));
       });
     });
+    // Cybertronic enhancements and Dark Legion necrobionics: "When a model in a squad takes an enhancement, all members of the same squad must take the same
+    // enhancement" (book p.351): one choice for the squad, on every model that may take enhancements
+    var squadMax = e.enh_per_squad ? e.models.reduce(function (s, m) { return Math.max(s, m.enhancements || 0); }, 0) : 0;
+    if (squadMax) {
+      var sq = u.enh["*"] || (u.enh["*"] = []);
+      opts.appendChild(el("h4", { text: "Enhancements: whole squad (up to " + squadMax + ")" }));
+      var sline = el("div", { class: "line" });
+      UWZ.armies[u.army].enhancements.forEach(function (it) {
+        var cb = el("input", { type: "checkbox", onchange: function () {
+          if (this.checked) sq.push(it.id); else u.enh["*"] = sq = sq.filter(function (x) { return x !== it.id; });
+          changed(true);
+        } });
+        cb.checked = sq.indexOf(it.id) >= 0;
+        sline.appendChild(tipLabel(it.tip, [cb, it.name + " (" + it.cost + " pts per model)"]));
+      });
+      opts.appendChild(sline);
+    }
     // powers and enhancements, per model type
     e.models.forEach(function (m) {
       if (m.powers && m.powers.length) {
@@ -371,7 +406,7 @@
           opts.appendChild(line);
         });
       }
-      if (m.enhancements) {
+      if (m.enhancements && !e.enh_per_squad) {
         var ch = u.enh[m.slug] || (u.enh[m.slug] = []);
         opts.appendChild(el("h4", { text: "Enhancements: " + m.name + " (up to " + m.enhancements + ")" }));
         var line = el("div", { class: "line" });
@@ -435,6 +470,10 @@
       chosen.push(lo.item + " (" + lo.weapon + ", " + loadoutN(u, lo) + " models" + (it && it.gives ? "; gives " + it.gives : "") + ")");
     });
     if (chosen.length) { dl.appendChild(el("dt", { text: "Load-outs" })); dl.appendChild(el("dd", { text: chosen.join("; ") })); }
+    if (e.enh_per_squad && (u.enh["*"] || []).length) {
+      var se = u.enh["*"].map(function (id) { var it = enhItem(u.army, id); return it ? withGives(it.name, it) : id; });
+      dl.appendChild(el("dt", { text: "Enhancements (whole squad)" })); dl.appendChild(el("dd", { text: se.join(", ") }));
+    }
     e.models.forEach(function (m) {
       if (!modelCount(u, m)) return;
       var names = [];
@@ -442,7 +481,7 @@
         (m.powers || []).forEach(function (pp) { var it = powerItem(u.army, pp.from, id); if (it) names.push(withGives(it.name, it)); });
       });
       if (names.length) { dl.appendChild(el("dt", { text: "Powers: " + m.name })); dl.appendChild(el("dd", { text: names.join(", ") })); }
-      var en = (u.enh[m.slug] || []).map(function (id) { var it = enhItem(u.army, id); return it ? withGives(it.name, it) : id; });
+      var en = (e.enh_per_squad ? [] : u.enh[m.slug] || []).map(function (id) { var it = enhItem(u.army, id); return it ? withGives(it.name, it) : id; });
       if (en.length) { dl.appendChild(el("dt", { text: "Enhancements: " + m.name })); dl.appendChild(el("dd", { text: en.join(", ") })); }
     });
     if (dl.children.length) card.querySelector("header").after(dl);
@@ -471,7 +510,7 @@
           addFrom(u.army, id);
           (m.powers || []).forEach(function (pp) { var it = powerItem(u.army, pp.from, id); if (it) addAll(u.army, it.grants); });
         });
-        (u.enh[m.slug] || []).forEach(function (id) { addFrom(u.army, id); addAll(u.army, (enhItem(u.army, id) || {}).grants); flags.enhancements = true; });
+        enhOf(u, e, m).forEach(function (id) { addFrom(u.army, id); addAll(u.army, (enhItem(u.army, id) || {}).grants); flags.enhancements = true; });
         if (m.refs.some(function (r) { return r.indexOf("enhancements-") === 0; })) flags.enhancements = true;
       });
       u.corp.forEach(function (x) { var it = loadoutItem(u.army, e.corp_loadout, x); if (it) { addFrom(u.army, it.id); addAll(u.army, it.grants); } });
