@@ -1,9 +1,9 @@
-lists.ratman = ["{ratman_prefix}{ratman_suffix}"];
+//lists.ratman = ["{ratman_prefix}{ratman_suffix}"];
 
-const pick   = a => a[Math.floor(Math.random() * a.length)];
+//const pick   = a => a[Math.floor(Math.random() * a.length)];
 
 
-function roll() {
+function ratman_out() {
     
 const prefix       = pick(lists.ratman_prefix);
 const suffixIf     = Math.floor(Math.random() * 100);
@@ -21,4 +21,4 @@ if (suffixIf === 98) {
 
     document.getElementById("out").textContent = name;
 }
-roll();
+//ratman_out();

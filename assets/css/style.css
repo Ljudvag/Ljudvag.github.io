@@ -188,4 +188,17 @@ blink {
     .menu-bar li:last-child > a {
         border-bottom: none;
     }
+.button {
+    padding: 8px 15px;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 1em;
+}
+
+.button:hover {
+    filter: brightness(1.2);
+}
+
 }

@@ -5,15 +5,6 @@ lists.corpo_prefix = [
     "Neo",
     "Future",
     
-    
-
-
-
-
-
-
-
-
 
 ]
 
@@ -26,7 +17,5 @@ lists.corpo_suffix = [
     " Solutions",
     " Labs",
     " Co.",
-
-
 
 ]
