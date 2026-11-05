@@ -1,27 +1,19 @@
 {% comment %}
-  Site navigation menu.
+  Site navigation: a small "Ljudvag home" link on every page except
+  the home page itself. The home page (index.html) holds the full tree
+  of links, so that is the one place to add a new section.
 
   This file is an "include": the default layout pulls it in (with an
-  include tag) so every page shows the same menu. Edit the links HERE
-  once, and every page updates. This replaces the old menu.js, which
-  built the menu with JavaScript in the browser.
-
-  Links are absolute (they start with "/") so they work the same from
-  any page, no matter how deeply nested.
+  include tag) so every page shows the same link. It matches the one
+  in fiveleagues-menu.html, so the whole site works the same way.
 
   This explanation is wrapped in a Liquid comment block, not an HTML
   comment. That matters: Liquid still runs its tags inside ordinary
   <!-- --> comments, so a tag written as an example there would actually
   execute. Keep Liquid examples out of HTML comments.
 {% endcomment %}
-<nav class="menu-bar">
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/music/">Music</a></li>
-    <li><a href="/miniatures/">Minis</a></li>
-    <li><a href="/dk3k/">DÖTTSKRIEG 3000</a></li>
-    <li><a href="/five-leagues/">Five Leagues</a></li>
-    <li><a href="/oskars-pixel-art/">Oskars Pixel-art</a></li>
-    <li><a href="/external-links/">External Links</a></li>
-  </ul>
-</nav>
+{% unless page.url == "/" %}
+<div style="text-align: right; font-size: 0.85em; margin: 5px 0;">
+  <a href="/" style="color: #888; text-decoration: none;">&larr; Ljudvag home</a>
+</div>
+{% endunless %}
