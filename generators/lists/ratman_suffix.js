@@ -1,1 +1,0 @@
-lists.ratman_suffix = ["ak", "az", "assik", "at", "ck", "cin", "drak", "dwell", "flem", "hakk", "hisk", "is", "iskikk", "k", "kin", "kis", "kual", "lik", "litch", "matz", "nagar", "naard", "ner", "neth", "nik", "quee", "quol", "r", "rik", "rin", "rit", "risk", "sch", "skabak", "skik", "skittar", "sisk", "stisk", "t", "tabak", "tar", "th", "zarr", "zel"]
